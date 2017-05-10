@@ -1,0 +1,21 @@
+AllCops:
+  Exclude:
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'vendor/**/*'
+    - 'spec/spec_helper.rb'
+    - 'spec/rails_helper.rb'
+    - 'tmp/**/*'
+    - 'Gemfile'
+
+Documentation:
+  Enabled: false
+
+Metrics/LineLength:
+  IgnoreCopDirectives: true
+  IgnoredPatterns:
+    - '^#.*'
+  Enabled: true
+
+Metrics/LineLength:
+  Max: 120
