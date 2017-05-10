@@ -1,3 +1,6 @@
+# Code Status
+[![Build Status](https://travis-ci.org/team-LetTheWookieWin/chess-app.svg?branch=master)](https://travis-ci.org/team-LetTheWookieWin/chess-app)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
