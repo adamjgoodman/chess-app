@@ -11,6 +11,20 @@
   <body>
     <%= link_to 'Home', root_path %>
     <%= link_to 'Game Page', games_path %>
+
+    <% if user_signed_in? %>
+          <%= link_to 'Sign out', destroy_user_session_path, method: :delete%>
+    <% else %>
+          <%= link_to 'Sign In', new_user_session_path %>
+          <%= link_to 'Sign up', new_user_registration_path %>
+    <% end %>
+
+    <% if notice.present? %>
+      <p class="alert alert-info"><%= notice %></p>
+    <% end %>
+    <% if alert.present? %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>
