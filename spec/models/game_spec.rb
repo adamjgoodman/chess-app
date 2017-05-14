@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "returns available games" do
+    available_games = Game.available
+    expect(available_games.size).to eq 2
+  end
 end
