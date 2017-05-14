@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  it "should returns available games" do
+  it "should return available games" do
     FactoryGirl.create(:available_game)
     FactoryGirl.create(:completed_game)
     available_games = Game.available
