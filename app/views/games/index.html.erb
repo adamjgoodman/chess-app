@@ -8,12 +8,14 @@
         <th>Player</th>
         <th>You would be...</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Deep Blue</td>
-        <td>Black</td>
-        <td><button type="submit" class="btn btn-primary">Join</button></td>
-      </tr>
+      <% @available_games.each do |available_game| %>
+        <tr>
+          <td>1</td>
+          <td>Deep Blue</td>
+          <td>Black</td>
+          <td><button type="submit" class="btn btn-primary">Join</button></td>
+        </tr>
+      <% end %>
     </table>
   </div>
 </div>
