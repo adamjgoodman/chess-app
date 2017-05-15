@@ -11,7 +11,7 @@
       <% @available_games.each_with_index do |available_game, i| %>
         <tr>
           <td><%= available_game.id %></td>
-          <td><%= available_game.user_id_black || available_game.user_id_white %></td>
+          <td><%= (available_game.user_black && available_game.user_black.email) || (available_game.user_white && available_game.user_white.email) %></td>
           <td><%= available_game.user_id_black != nil ? "White" : "Black" %></td>
           <td><button type="submit" class="btn btn-primary">Join</button></td>
         </tr>
