@@ -5,10 +5,14 @@ class Game < ApplicationRecord
   scope :available, (-> { where(status: 'available') })
 
   def missing_player_color
-    self.user_id_black != nil ? "White" : "Black"
+    if user_id_black.nil?
+      'White'
+    else
+      'Black'
+    end
   end
 
   def host_player
-    self.user_black || self.user_white
+    user_black || user_white
   end
 end
