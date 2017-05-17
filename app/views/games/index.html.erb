@@ -1,1 +1,21 @@
 <h1>Game Page</h1>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-heading">Available Games</div>
+    <table class="table">
+      <tr>
+        <th>#</th>
+        <th>Player</th>
+        <th>You would be...</th>
+      </tr>
+      <% @available_games.each_with_index do |available_game, i| %>
+        <tr>
+          <td><%= available_game.id %></td>
+          <td><%= available_game.host_player.email %></td>
+          <td><%= available_game.missing_player_color %></td>
+          <td><button type="submit" class="btn btn-primary">Join</button></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
