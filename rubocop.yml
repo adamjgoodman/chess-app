@@ -18,8 +18,7 @@ Metrics/LineLength:
   Enabled: true
 
 Metrics/LineLength:
-  Max: 120
-  
+  Max: 
+
 Style/ClassAndModuleChildren:
   Enabled: false
-  
