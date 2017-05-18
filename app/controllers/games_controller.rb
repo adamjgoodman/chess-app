@@ -3,5 +3,6 @@ class GamesController < ApplicationController
     @available_games = Game.available
   end
 
-  def show; end
+  def show
+  end
 end
