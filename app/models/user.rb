@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
+  has_many :games
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if (data = session['devise.facebook_data']) && session['devise.facebook_data']['extra']['raw_info']
