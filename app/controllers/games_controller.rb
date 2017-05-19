@@ -4,5 +4,6 @@ class GamesController < ApplicationController
   end
 
   def show
+    # code goes here
   end
 end
