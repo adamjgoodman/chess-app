@@ -1,0 +1,10 @@
+<h1>Chessboard</h1>
+
+<table id='chessboard'>
+  <% (0..7).each do |y| %>
+    <tr>
+    <% (0..7).each do |x| %>
+      <td data-x="<%= x %>" data-y="<%= y %>"></td>
+    <% end %>
+  <% end %>
+</table>
