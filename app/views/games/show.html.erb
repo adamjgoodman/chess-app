@@ -4,7 +4,13 @@
   <% (0..7).each do |y| %>
     <tr>
     <% (0..7).each do |x| %>
-      <td data-x="<%= x %>" data-y="<%= y %>"></td>
+      <td data-x="<%= x %>" data-y="<%= y %>">
+      <% @game.pieces.each do |piece| %>
+      	<% if piece.x_position == x && piece.y_position ==y %>
+      		<div class="piece">piece.unicode</div>
+      </td>
+      	<% end %>
+      <% end %>	 	
     <% end %>
   <% end %>
 </table>

@@ -26,9 +26,15 @@ table {
 }
 
 #chessboard tr:nth-child(2n) td:nth-child(2n+1) {
-  background: black;
+  background: grey;
 }
 
 #chessboard tr:nth-child(2n+1) td:nth-child(2n) {
-  background: black;
+  background: grey;
+}
+
+.piece {
+  text-align: center;
+  font-size: 40px;
+  
 }
