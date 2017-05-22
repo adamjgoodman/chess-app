@@ -56,7 +56,7 @@ class Piece < ApplicationRecord
   end
 
   # this method will return false if the path is clear
-  def is_obstructed?(x, y)
+  def path_obstructed?(x, y)
     return vertical_obstructed?(x, y) if vertical_move?(x, y)
     return horizontal_obstructed?(x, y) if horizontal_move?(x, y)
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
