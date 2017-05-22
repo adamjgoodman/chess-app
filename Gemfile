@@ -64,4 +64,6 @@ gem 'rubocop', '~> 0.48.1'
 gem 'devise'
 gem 'omniauth-facebook'
 
+gem 'simple_form'
+
 
