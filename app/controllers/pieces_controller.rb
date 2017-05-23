@@ -1,5 +1,4 @@
 class PiecesController < ApplicationController
-
   def update
     @piece = Pieces.find(params[:id])
     new_x = params[:x].to_i
@@ -14,5 +13,4 @@ class PiecesController < ApplicationController
   def piece_params
     params.require(:piece).permit(:x_position, :y_position)
   end
-
 end
