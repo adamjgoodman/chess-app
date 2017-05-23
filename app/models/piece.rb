@@ -1,7 +1,6 @@
 class Piece < ApplicationRecord
   belongs_to :game
 
-
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
   def space_occupied?(x, y)
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
@@ -63,5 +62,4 @@ class Piece < ApplicationRecord
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
   end
-
 end

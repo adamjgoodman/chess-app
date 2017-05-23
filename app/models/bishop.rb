@@ -3,12 +3,11 @@ class Bishop < Piece
     # add logic here
   end
 
-
-def unicode
-	if white
-		return "&#9815;"
-	else
-		return "&#9821;"
-	end
-end
+  def unicode
+    if white
+      '&#9815;'
+    else
+      '&#9821;'
+    end
+  end
 end

@@ -3,12 +3,11 @@ class Knight < Piece
     # add logic here
   end
 
-  
-def unicode
-	if white
-		return "&#9816;"
-	else
-		return "&#9822;"
-	end
-end
+  def unicode
+    if white
+      '&#9816;'
+    else
+      '&#9822;'
+    end
+  end
 end

@@ -3,13 +3,11 @@ class Queen < Piece
     # add logic here
   end
 
-  
-def unicode
-	if white
-		return "&#9813;"
-	else
-		return "&#9819;"
-	end
-end
-
+  def unicode
+    if white
+      '&#9813;'
+    else
+      '&#9819;'
+    end
+  end
 end
