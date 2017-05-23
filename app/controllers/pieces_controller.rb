@@ -3,7 +3,7 @@ class PiecesController < ApplicationController
     @piece = Pieces.find(params[:id])
     new_x = params[:x].to_i
     new_y = params[:y].to_i
-    return @piece.move!(new_x, new_y)
+    @piece.move!(new_x, new_y)
   end
 
   private
