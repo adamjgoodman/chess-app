@@ -1,6 +1,11 @@
 class Piece < ApplicationRecord
   belongs_to :game
 
+  def move!(x, y)
+    return false unless valid_move?(x, y)
+    true
+  end
+
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
   def space_occupied?(x, y)
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
