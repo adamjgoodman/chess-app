@@ -3,9 +3,9 @@ class Bishop < Piece
     # add logic here
   end
 
-  #Bishop
-def self.unicode
-	if self.white
+
+def unicode
+	if white
 		return "&#9815;"
 	else
 		return "&#9821;"

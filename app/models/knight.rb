@@ -3,9 +3,9 @@ class Knight < Piece
     # add logic here
   end
 
-  #Knight
+  
 def unicode
-	if self.white
+	if white
 		return "&#9816;"
 	else
 		return "&#9822;"

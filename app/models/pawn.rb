@@ -3,9 +3,9 @@ class Pawn < Piece
     # add logic here
   end
 
-  #pawn
+  
 def unicode
-	if self.white
+	if white
 		return "&#9817;"
 	else
 		return "&#9823;"

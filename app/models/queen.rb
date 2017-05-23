@@ -3,9 +3,9 @@ class Queen < Piece
     # add logic here
   end
 
-  #Queen
+  
 def unicode
-	if self.white
+	if white
 		return "&#9813;"
 	else
 		return "&#9819;"

@@ -3,7 +3,7 @@ class King < Piece
     # add logic here
   end
 
-  def self.unicode
+  def unicode
 	if white
 		return "&#9812;"
 	else
