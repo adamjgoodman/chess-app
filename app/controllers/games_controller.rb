@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find_by(id:15)
+    @game = Game.find_by(id:24)
   end
 
   def new

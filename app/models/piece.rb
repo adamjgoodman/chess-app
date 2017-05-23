@@ -1,13 +1,5 @@
 class Piece < ApplicationRecord
   belongs_to :game
-  # scope :kings, -> {where( type:'King')}
-  # scope :queenss, -> {where( type:'Queen')}
-  # scope :knights, -> {where( type:'Knight')}
-  # scope :bishops, -> {where( type:'Bishop')}
-  # scope :rooks, -> {where( type:'Rook')}
-  # scope :pawns, -> {where( type:'Pawn')}
-  # self.inheritance_column = :type
-
 
 
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
