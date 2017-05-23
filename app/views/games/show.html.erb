@@ -5,12 +5,11 @@
     <tr>
     <% (0..7).each do |x| %>
       <td data-x="<%= x %>" data-y="<%= y %>">
-      <% @game.pieces.each do |piece| %>
-      	<% if piece.x_position == x && piece.y_position ==y %>
-      		<div class="piece">piece.unicode</div>
+      <% piece = Piece.find_by(x_position: x, y_position: y, game_id: 21) %>
+      	<% if piece.present? %>
+      		<div class="piece"><%= piece.unicode.html_safe %></div>
       </td>
-      	<% end %>
-      <% end %>	 	
+      	<% end %>  	
     <% end %>
   <% end %>
 </table>

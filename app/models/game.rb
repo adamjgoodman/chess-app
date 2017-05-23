@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :user_black, class_name: 'User', foreign_key: 'user_id_black', optional: true
   belongs_to :user_white, class_name: 'User', foreign_key: 'user_id_white', optional: true
   has_many :pieces
+  # delegate :kings, :queens, :knights, :bishops, :rooks, :pawns, to: :pieces
 
   scope :available, (-> { where(status: 'available') })
 
@@ -20,37 +21,36 @@ class Game < ApplicationRecord
   def initialize_board
       # Building out white pieces
     (0..7).each do |x|
-    Pawn.create(white: true, x_position: x, y_position: 2, game_id: id, user_id: user_id_white, status: "active")
+    Pawn.create(white: true, x_position: x, y_position: 1, game_id: id, user_id: user_id_white, status: "available")
     end
 
-    Rook.create(white: true, x_position: 0, y_position: 0, game_id: id, user_id: user_id_white, status: "active")
-    Rook.create(white: true, x_position: 0, y_position: 7, game_id: id, user_id: user_id_white, status: "active")
+    Rook.create(white: true, x_position: 0, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
+    Rook.create(white: true, x_position: 7, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
 
-    Knight.create(white: true, x_position: 0, y_position: 1, game_id: id, user_id: user_id_white, status: "active")
-    Knight.create(white: true, x_position: 0, y_position: 6, game_id: id, user_id: user_id_white, status: "active")
+    Knight.create(white: true, x_position: 1, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
+    Knight.create(white: true, x_position: 6, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
 
-    Bishop.create(white: true, x_position: 0, y_position: 2, game_id: id, user_id: user_id_white, status: "active")
-    Bishop.create(white: true, x_position: 0, y_position: 5, game_id: id, user_id: user_id_white, status: "active")
+    Bishop.create(white: true, x_position: 2, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
+    Bishop.create(white: true, x_position: 5, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
 
-    King.create(white: true, x_position: 0, y_position: 4, game_id: id, user_id: user_id_white, status: "active")
-    Queen.create(white: true, x_position: 0, y_position: 3, game_id: id, user_id: user_id_white, status: "active")
-
+    King.create(white: true, x_position: 4, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
+    Queen.create(white: true, x_position: 3, y_position: 0, game_id: id, user_id: user_id_white, status: "available")
 
     # Building out the black pieces
     (0..7).each do |x|
-    Pawn.create(black: true, x_position: x, y_position: 6, game_id: id, user_id: user_id_black, status: "active")
+    Pawn.create(black: true, x_position: x, y_position: 6, game_id: id, user_id: user_id_black, status: "available")
     end
 
-    Rook.create(black: true, x_position: 7, y_position: 0, game_id: id, user_id: user_id_black, status: "active")
-    Rook.create(black: true, x_position: 7, y_position: 7, game_id: id, user_id: user_id_black, status: "active")
+    Rook.create(black: true, x_position: 0, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
+    Rook.create(black: true, x_position: 7, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
 
-    Knight.create(black: true, x_position: 7, y_position: 1, game_id: id, user_id: user_id_black, status: "active")
-    Knight.create(black: true, x_position: 7, y_position: 6, game_id: id, user_id: user_id_black, status: "active")
+    Knight.create(black: true, x_position: 1, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
+    Knight.create(black: true, x_position: 6, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
 
-    Bishop.create(black: true, x_position: 7, y_position: 2, game_id: id, user_id: user_id_black, status: "active")
-    Bishop.create(black: true, x_position: 7, y_position: 5, game_id: id, user_id: user_id_black, status: "active")
+    Bishop.create(black: true, x_position: 2, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
+    Bishop.create(black: true, x_position: 5, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
 
-    King.create(black: true, x_position: 7, y_position: 4, game_id: id, user_id: user_id_black, status: "active")
-    Queen.create(black: true, x_position: 7, y_position: 3, game_id: id, user_id: user_id_black, status: "active")
+    King.create(black: true, x_position: 4, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
+    Queen.create(black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: "available")
   end
 end
