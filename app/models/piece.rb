@@ -3,7 +3,7 @@ class Piece < ApplicationRecord
 
   def move!(x, y)
     return false unless valid_move?(x, y)
-    true
+    update_attributes(x_position: new_x, y_position: new_y)
   end
 
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
