@@ -1,2 +1,105 @@
-<h1>Home Page</h1>
+<div class="booyah-box col-10 offset-1 text-center">
+  <br />
+  <br />
+  <br />
+		<h1>Welcome to "Let the Wookie Win!"</h1>
+	<h3><i>Play Chess On YOUR Schedule</i></h3>
+  <br />
+  <br />
+  <!-- Button trigger how to play modal -->
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#howToPlayModal">
+    How To Play
+  </button>
+  <br />
+  <br />
+  <br />
+  <!-- Button trigger "Offer A Game" modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#offerGameModal">
+Offer A Game
+</button>
+  <br />
+  <br />
+  <h1>Or Accept An Invitation:</h1>
+  <br />
+  <h2><b>Available Games</b></h2>
+  <br />
+  
+  <p>(We will have the list of available games Issei is building here)</p>
+  <br />
+  <br />
+  <br />
+</div>
 
+
+
+
+
+<!-- how to play Modal -->
+<div class="modal fade" id="howToPlayModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">How To Play</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+        <b>FIRST you need to sign up and log in.</b> To sign up, <%= link_to 'Click Here', new_user_registration_path %>. To log in, <%= link_to 'Click here', new_user_session_path %>.
+        </p>
+        <p><b>ONCE YOU'RE LOGGED IN:</b></p>
+        <p>
+        1.  Offer a game or accept someone’s invitation . You can either offer a game or accept someone else’s invitation to play.  
+        </p>
+        <p>
+        2.  A game board opens. As soon as two people have agreed to play, the game board will show both people’s names, who is online, and whose move it is. Each of you needs to be online to make a move, but you don’t have to be online at the same time.  
+        </p>
+        <p>
+        3.  If you are both online, you can just begin playing. The board will redraw after each move and keep track of pieces captured, moves that have been made, and whose move it is.  
+        </p>
+        <p> 
+        4.  If your partner is offline, click the “Send an email" button on the game board. (If at any point you are online but your partner is not, you can click the “Send an email” button to notify your partner when it’s his/her move.  )
+        </p>
+        <p>
+        5.  If you are offline and receive an email, log in and make your next move. (If you are offline when your partner makes a move, your partner can click the “Send an email” button to notify you that it’s your turn.)
+        </p>
+        <br />
+        <br />
+        <p><b>Your dashboard:</b></p>
+        <p> 1.  You can play more than one game at a time.  </p>
+        <p>  2.  If you are only playing one game, when you log in you will go immediately to that game board.   </p>
+        <p> 3.  If you’re playing more than one game, when you log in you will go to your dashboard. Your dashboard shows all the games you are currently playing, as well as listing all the games you have played. From there you can choose which game board you want to see.</p>
+        <br />
+        <p><b>What does it cost?</b></p>
+        <p> Nothing! “Let The Wookie Win” is a free service offered by (list our names with links). </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- "Offer A Game"Modal -->
+<div class="modal fade" id="offerGameModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title" id="myModalLabel">Offer A Game</h4>
+      </div>
+      <div class="modal-body">
+        <p> (This modal will contain a SimpleForm that creates a new game) </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
