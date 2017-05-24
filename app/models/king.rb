@@ -26,12 +26,6 @@ class King < Piece
     end
   end
 
-  # King is not allowed to put himself in check.  This retrieves the position of the opposing king
-  # def check?(x, y)
-  #   White = Self.find_by_color("white")
-  #   Black = Self.find_by_color("black")
-
-  # end
 
 end
 
