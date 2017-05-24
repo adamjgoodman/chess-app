@@ -4,10 +4,6 @@ class Pawn < Piece
   end
 
   def unicode
-    if white
-      '&#9817;'
-    else
       '&#9823;'
-    end
   end
 end

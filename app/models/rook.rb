@@ -4,10 +4,6 @@ class Rook < Piece
   end
 
   def unicode
-    if white
-      '&#9814;'
-    else
       '&#9820;'
-    end
   end
 end

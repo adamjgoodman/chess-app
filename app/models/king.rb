@@ -4,10 +4,6 @@ class King < Piece
   end
 
   def unicode
-    if white
-      '&#9812;'
-    else
       '&#9818;'
-    end
   end
 end
