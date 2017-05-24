@@ -1,14 +1,11 @@
 class King < Piece
-
   def move_valid?(x, y)
-    while
-      space_occupied?(x, y) == false # I think I can pull this straight from pieces
-      legal_move?(x, y) == true
-      check?(x, y) == false
+    if
+      space_occupied?(x, y) = false
+      legal_move?(x, y) = true
+      # check?(x, y) == false <when we have this logic
     end
-
   end
-
 
   def legal_move?(x, y)
     case
@@ -25,7 +22,4 @@ class King < Piece
       return false
     end
   end
-
-
 end
-
