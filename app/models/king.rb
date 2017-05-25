@@ -6,18 +6,9 @@ class King < Piece
   end
 
   def legal_move?(x, y)
-    case
-    when
-    (x_position - x).abs == 1 && y_position == y
-      true
-    when
-    x_position == x && (y_position - y).abs == 1
-      true
-    when
-    (x_position - x).abs == 1 && (y_position - y).abs == 1
-      true
-    else
-      false
-    end
+    return true if (x_position - x).abs == 1 && y_position == y
+    return true if x_position == x && (y_position - y).abs == 1
+    return true if (x_position - x).abs == 1 && (y_position - y).abs == 1
+    else return false
   end
 end
