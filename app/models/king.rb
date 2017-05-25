@@ -1,36 +1,29 @@
 class King < Piece
-
   def move_valid?(x, y)
-    while
-      space_occupied?(x, y) == false # I think I can pull this straight from pieces
-      legal_moves(x, y) == true
-      check? == false
-    end
-
+    return false if space_occupied?(x, y) == true
+    return false if legal_move?(x, y) == false
+    true
   end
 
-private
-
-  def legal_moves(x, y)
-    case position
-    when
-    (x_position - x).abs == 1 && y_position == y
-      return true
-    when
-    x_position == x && (y_position - y).abs == 1
-      return true
-    when
-    (x_position - x).abs == 1 && (y_position - y).abs == 1
-      return true
-    else
-      return false
-    end
+  def diagonal_legal?(x, y)
+    return (x_position - x).abs == 1 && (y_position - y).abs == 1 if diagonal_move?(x, y)
+    false
   end
 
-  # King is not allowed to put himself in check.  This retrieves the position of the opposing king
-  def check?(x, y)
-    White = Self.find_by_color("white")
-    Black = Self.find_by_color("black")
+  def horizontal_legal?(x, y)
+    return (x_position - x).abs == 1 && y_position == y if horizontal_move?(x, y)
+    false
   end
 
+  def vertical_legal?(x, y)
+    return x_position == x && (y_position - y).abs == 1 if vertical_move?(x, y)
+    false
+  end
+
+  def legal_move?(x, y)
+    return true if diagonal_legal?(x, y)
+    return true if horizontal_legal?(x, y)
+    return true if vertical_legal?(x, y)
+    false
+  end
 end
