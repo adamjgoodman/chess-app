@@ -7,9 +7,9 @@ class Game < ApplicationRecord
 
   def missing_player_color
     if user_id_black.nil?
-      'White'
-    else
       'Black'
+    else
+      'White'
     end
   end
 
