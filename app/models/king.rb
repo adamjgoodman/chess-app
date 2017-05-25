@@ -6,7 +6,7 @@ class King < Piece
   end
 
   def legal_move?(x, y)
-    case legal
+    case
     when
     (x_position - x).abs == 1 && y_position == y
       true
@@ -19,6 +19,5 @@ class King < Piece
     else
       false
     end
-    return legal
   end
 end
