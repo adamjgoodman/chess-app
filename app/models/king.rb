@@ -1,9 +1,7 @@
 class King < Piece
   def move_valid?(x, y)
-    if
-      space_occupied?(x, y) == false
-      legal_move?(x, y) == true
-      # check?(x, y) == false <when we have this logic
+    if space_occupied?(x, y) == false && legal_move?(x, y) == true
+      # && check?(x, y) == false <when we have this logic
     end
   end
 
@@ -11,15 +9,15 @@ class King < Piece
     case
     when
     (x_position - x).abs == 1 && y_position == y
-      return true
+      true
     when
     x_position == x && (y_position - y).abs == 1
-      return true
+      true
     when
     (x_position - x).abs == 1 && (y_position - y).abs == 1
-      return true
+      true
     else
-      return false
+      false
     end
   end
 end
