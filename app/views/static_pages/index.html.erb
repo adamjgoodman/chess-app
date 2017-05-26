@@ -43,15 +43,13 @@
       <% @available_games.each do |available_game| %>
         <tr>
           <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.email %></td>
+          <td><%= available_game.host_player.name %></td>
           <td><%= available_game.missing_player_color %></td>
      
           <td>      <%= simple_form_for available_game do |f| %>
           <% if user_signed_in? %>
             <%= f.hidden_field available_game.missing_player_color == 'White' ? 
               :user_id_white : :user_id_black, value: current_user.id %> 
-
-         
 
             <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
           <% else %>
