@@ -5,7 +5,7 @@ class GamesController < ApplicationController
 
   def show
     # code to get the board on my page. 24 is the game id that had all my pieces so I hardcoded it
-    @game = Game.find_by(id: 24)
+    @game = Game.find_by(id: 29)
   end
 
   def new
