@@ -1,5 +1,4 @@
 class Knight < Piece
-  def move_valid?
-     
+  def move_valid?   
   end
 end
