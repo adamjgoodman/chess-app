@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   def update
-    @piece = Pieces.find(params[:id])
+    @piece = Piece.find(params[:id])
     new_x = params[:x].to_i
     new_y = params[:y].to_i
     @piece.move!(new_x, new_y)
