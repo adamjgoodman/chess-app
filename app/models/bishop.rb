@@ -4,6 +4,6 @@ class Bishop < Piece
   end
 
   def unicode
-      '&#9821;'
+    '&#9821;'
   end
 end

@@ -28,6 +28,6 @@ class King < Piece
   end
 
   def unicode
-      '&#9818;'
+    '&#9818;'
   end
 end
