@@ -7,7 +7,7 @@
       <td data-x="<%= x %>" data-y="<%= y %>">
       <% piece = Piece.find_by(x_position: x, y_position: y, game_id: @game.id) %>
       	<% if piece.present? %>
-      		<div class="piece" data-black="<%= !piece.black? %>"><%= piece.unicode.html_safe %></div>
+      		<div class="piece" data-black="<%= !piece.is_black %>"><%= piece.unicode.html_safe %></div>
       </td>
       	<% end %>  	
     <% end %>
