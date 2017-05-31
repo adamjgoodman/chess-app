@@ -1,32 +1,26 @@
 class Knight < Piece
-
   def move_valid?(x, y)
-    if x < 0 || 7 < x || y < 0 || 7 < y
-      return false
-    end
+    return false if space_occupied?(x, y)
+    return true if upper_right_diagonal_legal?(x, y)
+    return true if lower_right_diagonal_legal?(x, y)
+    return true if upper_left_diagonal_legal?(x, y)
+    return true if lower_left_diagonal_legal?(x, y)
+    false
+  end
 
-    if space_occupied?(x, y)
-      return false
-    end
+  def upper_right_diagonal_legal?(x, y)
+    (x_position + 1 == x && y_position - 2 == y) || (x_position + 2 == x && y_position - 1 == y)
+  end
 
-    if x_position+1 == x && y_position-2 == y 
-      true
-    elsif x_position+2 == x && y_position-1 == y 
-      true 
-    elsif x_position+2 == x && y_position+1 == y
-      true
-    elsif x_position+1 == x && y_position+2 == y
-      true
-    elsif x_position-1 == x && y_position+2 == y
-      true
-    elsif x_position-2 == x && y_position+1 == y
-      true
-    elsif x_position-2 == x && y_position-1 == y 
-      true
-    elsif x_position-1 == x && y_position-2 == y
-      true
-    else
-      false
-    end
+  def lower_right_diagonal_legal?(x, y)
+    (x_position + 2 == x && y_position + 1 == y) || (x_position + 1 == x && y_position + 2 == y)
+  end
+
+  def upper_left_diagonal_legal?(x, y)
+    (x_position - 2 == x && y_position - 1 == y) || (x_position - 1 == x && y_position - 2 == y)
+  end
+
+  def lower_left_diagonal_legal?(x, y)
+    (x_position - 1 == x && y_position + 2 == y) || (x_position - 2 == x && y_position + 1 == y)
   end
 end

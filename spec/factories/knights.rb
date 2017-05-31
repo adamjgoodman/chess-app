@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :knight do 
+  factory :knight do
   end
 
   factory :black_knight_left, class: Knight do
@@ -16,12 +16,12 @@ FactoryGirl.define do
     y_position 0
   end
 
-  factory :white_knight, class: Knight do 
+  factory :white_knight, class: Knight do
     white true
     black false
   end
 
-  factory :white_knight_left, class: Knight do 
+  factory :white_knight_left, class: Knight do
     white true
     black false
     x_position 1

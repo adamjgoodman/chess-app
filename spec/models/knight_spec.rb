@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe Knight, type: :model do 
-  it 'should make a move that consists of first one step in a horizontal or vertical direction, and then one step diagonally in an outward direction' do
+RSpec.describe Knight, type: :model do
+  it 'knight should make a valid move' do
     game = FactoryGirl.create(:game)
 
     black_knight_left = FactoryGirl.create(:black_knight_left, game_id: game.id)
@@ -33,7 +33,7 @@ RSpec.describe Knight, type: :model do
     expect(white_knight_right.move_valid?(6, 5)).to eq false
 
     white_knight_left.update(x_position: 4, y_position: 6)
-    
+
     expect(white_knight_right.move_valid?(4, 6)).to eq false
   end
 end
