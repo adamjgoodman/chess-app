@@ -2,8 +2,8 @@ class GamesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
 
   def index
-    @available_games = Game.available  
-    @game = Game.new 
+    @available_games = Game.available
+    @game = Game.new
   end
 
   def create
@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   end
 
   def update
-  	@game = Game.find(params[:id])
+    @game = Game.find(params[:id])
     @game.update_attributes(game_params.merge(status: 'active'))
     redirect_to game_path(@game)
   end
