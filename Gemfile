@@ -65,5 +65,6 @@ gem 'devise'
 gem 'omniauth-facebook'
 
 gem 'simple_form'
+gem "font-awesome-rails"
 
 

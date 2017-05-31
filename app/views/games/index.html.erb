@@ -1,21 +1,43 @@
-<h1>Game Page</h1>
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading">Available Games</div>
-    <table class="table">
-      <tr>
-        <th>#</th>
-        <th>Player</th>
-        <th>You would be...</th>
-      </tr>
-      <% @available_games.each_with_index do |available_game, i| %>
+<br />
+<div class="booyah-box col-10 offset-1">
+  <h1>Games Page</h1>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>Available Games</b></div>
+      <table class="table">
         <tr>
-          <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.email %></td>
-          <td><%= available_game.missing_player_color %></td>
-          <td><button type="submit" class="btn btn-primary">Join</button></td>
+          <th>#</th>
+          <th>Player</th>
+          <th>You would be...</th>
         </tr>
-      <% end %>
-    </table>
+        <% @available_games.each do |available_game| %>
+          <tr>
+            <td><%= available_game.id %></td>
+            <td><%= available_game.host_player.email %></td>
+            <td><%= available_game.missing_player_color %></td>
+
+            <td>      <%= simple_form_for available_game do |f| %>
+
+            <%= f.hidden_field available_game.missing_player_color == 'White' ? 
+              :user_id_white : :user_id_black, value: current_user.id %> 
+
+            <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary button-small' %>
+            <br />
+            <% end %>
+           </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class="panel-heading"><b>Completed Games</b></div>
+      <table class="table">
+        <tr>
+          <th>#</th>
+          <th>White Player</th>
+          <th>Black Player</th>
+          <th>Outcome</th>
+        </tr>
+      </table>
+    </div>
   </div>
 </div>
