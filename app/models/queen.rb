@@ -4,6 +4,6 @@ class Queen < Piece
   end
 
   def unicode
-      '&#9819;'
+    '&#9819;'
   end
 end

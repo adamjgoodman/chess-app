@@ -4,6 +4,6 @@ class Knight < Piece
   end
 
   def unicode
-      '&#9822;'
+    '&#9822;'
   end
 end

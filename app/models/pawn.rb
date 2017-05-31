@@ -4,6 +4,6 @@ class Pawn < Piece
   end
 
   def unicode
-      '&#9823;'
+    '&#9823;'
   end
 end

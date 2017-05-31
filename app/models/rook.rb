@@ -4,6 +4,6 @@ class Rook < Piece
   end
 
   def unicode
-      '&#9820;'
+    '&#9820;'
   end
 end
