@@ -17,6 +17,11 @@ class Game < ApplicationRecord
     user_black || user_white
   end
 
+  def reset_piece_players
+    pieces.where(is_black: true).update_all(user_id: user_id_black)
+    pieces.where(is_black: false).update_all(user_id: user_id_white)
+  end
+
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
