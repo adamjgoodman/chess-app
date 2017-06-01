@@ -22,9 +22,9 @@ RSpec.describe Bishop, type: :model do
 
   it 'should not land on the spot with a piece of the same color' do
     game = Game.create(status: 'available')
-    white_pawn = Pawn.create(black?: false, x_position: 3, y_position: 3, game_id: game.id)
-    black_bishop = Bishop.create(black?: true, x_position: 1, y_position: 1, game_id: game.id)
-    black_pawn = Pawn.create(black?: true, x_position: 1, y_position: 1, game_id: game.id)
+    white_pawn = Pawn.create(is_black: false, x_position: 3, y_position: 3, game_id: game.id)
+    black_bishop = Bishop.create(is_black: true, x_position: 1, y_position: 1, game_id: game.id)
+    black_pawn = Pawn.create(is_black: true, x_position: 1, y_position: 1, game_id: game.id)
 
     expect(black_bishop.move_valid?(3, 3)).to be true
     expect(black_bishop.move_valid?(1, 1)).to be false

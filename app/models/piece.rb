@@ -12,7 +12,7 @@ class Piece < ApplicationRecord
   end
 
   def opponent_color(x, y) # returns true for black and false for white
-    game.pieces.find_by(x_position: x, y_position: y).black?
+    game.pieces.find_by(x_position: x, y_position: y).is_black
   end
 
   # checking to see what type of move -- vertical, horizontal, or diagonal

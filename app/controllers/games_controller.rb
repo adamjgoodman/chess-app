@@ -15,13 +15,13 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @game.update_attributes(game_params.merge(status: 'active'))
+    @game.reset_piece_players
     redirect_to game_path(@game)
   end
 
   def show
     @game = Game.find(params[:id])
   end
-
 
   private
 
