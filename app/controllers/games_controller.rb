@@ -8,17 +8,23 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params.merge(status: 'available'))
+    @game.initialize_board
     redirect_to game_path(@game)
   end
 
   def update
     @game = Game.find(params[:id])
     @game.update_attributes(game_params.merge(status: 'active'))
+    @game.reset_piece_players
     redirect_to game_path(@game)
   end
 
   def show
     @game = Game.find(params[:id])
+  end
+
+  def new
+    @game = Game.new
   end
 
   private

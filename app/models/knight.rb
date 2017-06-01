@@ -23,4 +23,8 @@ class Knight < Piece
   def lower_left_diagonal_legal?(x, y)
     (x_position - 1 == x && y_position + 2 == y) || (x_position - 2 == x && y_position + 1 == y)
   end
+
+  def unicode
+    '&#9822;'
+  end
 end

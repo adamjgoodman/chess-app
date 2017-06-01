@@ -26,4 +26,8 @@ class King < Piece
     return true if vertical_legal?(x, y)
     false
   end
+
+  def unicode
+    '&#9818;'
+  end
 end
