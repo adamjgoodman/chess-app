@@ -22,7 +22,8 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
-  # rubocop:disable Metrics/AbcSize Style/MethodLength
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable MethodLength
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
@@ -58,5 +59,6 @@ class Game < ApplicationRecord
     King.create(is_black: true, x_position: 4, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
     Queen.create(is_black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
   end
-  # rubocop:enable Metrics/AbcSize Style/MethodLength
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable MethodLength
 end
