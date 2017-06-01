@@ -1,5 +1,6 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  has_many :moves
 
   def move!(x, y)
     return false unless valid_move?(x, y)
@@ -67,5 +68,9 @@ class Piece < ApplicationRecord
     return horizontal_obstructed?(x, y) if horizontal_move?(x, y)
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
+  end
+  #cehcking for opposing color
+  def opposite_color
+    self.is_black == true ? 'white' : 'black'
   end
 end

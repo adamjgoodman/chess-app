@@ -39,4 +39,13 @@ RSpec.describe Piece, type: :model do
     expect(piece1.path_obstructed?(4, 6)).to be false
     expect(piece1.path_obstructed?(6, 4)).to be false
   end
+
+  it "should return opposite color of an existing piece" do
+    game = Game.create(active: true)
+    piece1 = Piece.create(x_position: 4, y_position: 4, game_id: game.id, is_black: true)
+    piece2 = Piece.create(x_position: 5, y_position: 5, game_id: game.id, is_black: false)
+
+    expect(piece1.opposite_color).to eq('white')
+    expect(piece2.opposite_color).to eq('black')
+  end
 end
