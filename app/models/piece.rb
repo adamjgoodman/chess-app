@@ -69,7 +69,7 @@ class Piece < ApplicationRecord
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
   end
-  #cehcking for opposing color
+  #checking for opposite color piece
   def opposite_color
     self.is_black == true ? 'white' : 'black'
   end
