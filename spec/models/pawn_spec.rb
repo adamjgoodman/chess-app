@@ -25,4 +25,20 @@ RSpec.describe Pawn, type: :model do
     expect(black_pawn2.legal_move?(2, 4)).to be false
     expect(black_pawn2.legal_move?(3, 3)).to be false
   end
+  it 'should not allow a vertical move into an occupied space' do
+    game = Game.create(status: 'available')
+    white_pawn = Pawn.create(is_black: false, x_position: 3, y_position: 3, game_id: game.id)
+    black_pawn = Pawn.create(is_black: true, x_position: 3, y_position: 4, game_id: game.id)
+    white_pawn2 = Pawn.create(is_black: false, x_position: 6, y_position: 2, game_id: game.id)
+    black_pawn2 = Pawn.create(is_black: true, x_position: 6, y_position: 4, game_id: game.id)
+    white_knight = Knight.create(is_black: false, x_position: 6, y_position: 3, game_id: game.id)
+
+    # pawns obstructing each other's move
+    expect(white_pawn.legal_move?(3, 4)).to be false
+    expect(black_pawn.legal_move?(3, 3)).to be false
+
+    # opposite color or same color piece other than pawn obstructing move
+    expect(white_pawn2.legal_move?(6, 3)).to be false
+    expect(black_pawn2.legal_move?(6, 3)).to be false
+  end
 end
