@@ -32,6 +32,13 @@ class King < Piece
     false
   end
 
+  def in_check?
+    game.pieces.where(is_black: !is_black).each do |piece|
+      return true if piece.valid_move?(x_position, y_position)
+    end
+    false
+  end
+
   def unicode
     '&#9818;'
   end
