@@ -22,6 +22,6 @@ Metrics/LineLength:
   
 Style/ClassAndModuleChildren:
   Enabled: false
-
+  
 Metrics/BlockLength:
   Enabled: false

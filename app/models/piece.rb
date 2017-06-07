@@ -1,5 +1,6 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  has_many :moves
 
   def move!(x, y)
     return false unless valid_move?(x, y)
@@ -12,23 +13,16 @@ class Piece < ApplicationRecord
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
   end
 
-  # checking to see if the square we want is occupied by a piece of the same color or opposing color
-  def piece_opposing_color
-      @piece = Piece.find(:id)
-      @piece.is_black ? false : true
-  end
+  def opponent_color(x, y) # returns true for black and false for white
+    game.pieces.find_by(x_position: x, y_position: y).is_black
 
-  def piece_same_color
-      @piece = Piece.find(:id)
-      @piece.is_black ? true : false
-  end
-
-  def space_occupied_by_opposing_color_piece?(x, y)
-    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, piece_opposing_color).present?
+  # checking to see if the square we want is occupied by a piece of the same color or opponent color
+  def space_occupied_by_opponent_color_piece?(x, y)
+    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, opponent_color(x, y)).exists?
   end
 
   def space_occupied_by_same_color_piece?(x, y)
-    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, piece_same_color).present?
+    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, !opponent_color(x, y)).exists?
   end
 
   # checking to see what type of move -- vertical, horizontal, or diagonal
