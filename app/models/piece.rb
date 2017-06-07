@@ -1,5 +1,6 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  has_many :moves
 
   def move!(x, y)
     return false unless valid_move?(x, y)
