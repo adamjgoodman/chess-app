@@ -89,7 +89,7 @@ class Piece < ApplicationRecord
     false
   end
 
-  def rook_at(x,y)
+  def rook_at(x, y)
     piece = piece_at(x, y)
     piece && piece.type == 'Rook' ? piece : nil
   end

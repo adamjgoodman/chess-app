@@ -18,8 +18,8 @@ RSpec.describe King, type: :model do
     game = Game.create(status: 'available')
     black_king = King.create(x_position: 4, y_position: 7, game_id: game.id)
     white_king = King.create(x_position: 4, y_position: 0, game_id: game.id)
-    black_kingside_rook = Rook.create(x_position: 7, y_position: 7, game_id: game.id)
-    white_queenside_rook = Rook.create(x_position: 0, y_position: 0, game_id: game.id)
+    Rook.create(x_position: 7, y_position: 7, game_id: game.id)
+    Rook.create(x_position: 0, y_position: 0, game_id: game.id)
 
     expect(black_king.legal_move?(6, 7)).to be true
     expect(white_king.legal_move?(2, 0)).to be true

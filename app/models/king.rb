@@ -36,7 +36,7 @@ class King < Piece
   def castle_legal?(x, y)
     # if the king has previously moved, castling is illegal:
     return false if moves.count != 0
-    return false if horizontal_obstructed(x, y)
+    return false if horizontal_obstructed?(x, y)
     return true if castle_kingside_legal?(x, y) || castle_queenside_legal?(x, y)
     false
   end
