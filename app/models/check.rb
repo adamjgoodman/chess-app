@@ -1,7 +1,9 @@
-class Check
+module Check
   king = Piece.where(type: "King", color: is_black)
   antagonists = Piece.where(color: !is_black)
   square = king.x_position, king.y_position
+
+  # module should run through each opponent piece on the board and check to see if the king in question is within their range of legal movements.  If it is, it should return check.
 
   def in_check?(x, y)
     # will evaluate true when in check
@@ -28,24 +30,24 @@ class Check
   end
 
   def antagonist_knight?(x, y)
-    antagonist_knight = Piece.where(type: "knight")
+    antagonist_knight = Piece.where(type: "knight", color: !is_black)
     # will evaluate true when checking
   end
 
   def antagonist_rook?(x, y)
-    # will evaluate true when checking
+    antagonist_rook = Piece.where(type: "rook", color: !is_black)
   end
 
   def antagonist_castle?(x, y)
-    # will evaluate true when checking
+    antagonist_castle = Piece.where(type: "castle", color: !is_black)
   end
 
   def antagonist_queen?(x, y)
-    # will evaluate true when checking
+    antagonist_queen = Piece.where(type: "queen", color: !is_black)
   end
 
   def antagonist_bishop?(x, y)
-    # will evaluate true when checking
+    antagonist_bishop = Piece.where(type: "bishop", color: !is_black)
   end
 end
 
