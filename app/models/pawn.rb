@@ -61,7 +61,7 @@ class Pawn < Piece
   end
 
   # capture en passant
-  def capture_en_passant_legal(x, y)
+  def capture_en_passant_legal?(x, y)
     return true if black_capture_en passant_is_ok(x, y) || white_capture_en_passant_is_ok(x, y)
     false
   end
@@ -72,7 +72,9 @@ class Pawn < Piece
   end
 
   def white_capture_en_passant_to_right_is_ok(x, y)
-    return false unless pawn_at(x + 1, y - 1).is_black.exists? && pawn_at(x + 1, y - 1).move.count != 1
+    return false unless pawn_at(x_position + 1, 4).is_black.exists? && pawn_at(x + 1, 4).moves.count != 1
+    return false unless x == x_position + 1 && y == 3
+    true
   end
 
   def white_capture_en_passant_to_left_is_ok(x, y)
