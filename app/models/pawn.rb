@@ -25,7 +25,7 @@ class Pawn < Piece
 
   # regular diagonal capture
   def regular_capture_legal?(x, y)
-    return false unless space_occupied_by_opposing_color_piece?(x, y)
+    return false unless space_occupied_by_opponent_color_piece?(x, y)
     return true if black_regular_capture_is_ok(x, y) || white_regular_capture_is_ok(x, y)
     false
   end
