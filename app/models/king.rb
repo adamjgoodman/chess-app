@@ -20,22 +20,24 @@ class King < Piece
     false
   end
 
-  def castle_kingside_legal(x, y)
-    # if the king has previously moved, castling is illegal:
-    return false if moves.count != 0
+  def castle_kingside_legal?(x, y)
     return false if !rook_at(7, y) || rook_at(7, y).moves.count != 0
-    return false if horizontal_obstructed(x, y)
     return true if x == 6
     false
   end
 
-  def castle_queenside_legal(x, y)
-    # if the king has previously moved, castling is illegal:
-    return false if moves.count != 0
+  def castle_queenside_legal?(x, y)
     return false if !rook_at(0, y) || rook_at(0, y).moves.count != 0
-    return false if horizontal_obstructed(x, y)
     return false if space_occupied?(1, 0)
     return true if x == 2
+    false
+  end
+
+  def castle_legal?(x, y)
+    # if the king has previously moved, castling is illegal:
+    return false if moves.count != 0
+    return false if horizontal_obstructed(x, y)
+    return true if castle_kingside_legal?(x, y) || castle_queenside_legal?(x, y)
     false
   end
 
@@ -43,6 +45,7 @@ class King < Piece
     return true if diagonal_legal?(x, y)
     return true if horizontal_legal?(x, y)
     return true if vertical_legal?(x, y)
+    return true if castle_legal?(x, y)
     false
   end
 
