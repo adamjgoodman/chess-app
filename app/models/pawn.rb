@@ -1,7 +1,9 @@
 class Pawn < Piece
   def move_valid?(x, y)
-    return false if legal_move?(x, y) == false
-    true
+    return true if one_step_legal?(x, y)
+    return true if regular_capture_legal?(x, y)
+    return true if capture_en_passan_legal(x, y)
+    false
   end
 
   # basic one-step move:
@@ -58,11 +60,38 @@ class Pawn < Piece
     false
   end
 
-  def legal_move?(x, y)
-    return true if one_step_legal?(x, y)
-    return true if regular_capture_legal?(x, y)
+  # capture en passant
+  def capture_en_passant_legal(x, y)
+    return true if black_capture_en passant_is_ok(x, y) || white_capture_en_passant_is_ok(x, y)
     false
   end
+
+  def white_capture_en_passant_is_ok(x, y)
+    return true if white_capture_en_passant_to_right_is_ok(x, y) || white_capture_en_passant_to_left_is_ok(x, y)
+    false
+  end
+
+  def white_capture_en_passant_to_right_is_ok(x, y)
+    return false unless pawn_at(x + 1, y - 1).is_black.exists? && pawn_at(x + 1, y - 1).move.count != 1
+  end
+
+  def white_capture_en_passant_to_left_is_ok(x, y)
+
+  end
+
+  def black_capture_en_passant_is_ok(x, y)
+    return true if black_capture_en_passant_to_right_is_ok(x, y) || black_capture_en_passant_to_left_is_ok(x, y)
+    false
+  end
+
+  def black_capture_en_passant_to_right_is_ok(x, y)
+
+  end
+
+  def black_capture_en_passant_to_left_is_ok(x, y)
+
+  end
+
 
   def unicode
     '&#9823;'
