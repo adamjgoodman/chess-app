@@ -12,6 +12,10 @@ class Piece < ApplicationRecord
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
   end
 
+  def opponent_color(x, y) # returns true for black and false for white
+    game.pieces.find_by(x_position: x, y_position: y).is_black
+  end
+
   # checking to see what type of move -- vertical, horizontal, or diagonal
   def vertical_move?(x, y)
     return true if x_position == x && y_position != y
