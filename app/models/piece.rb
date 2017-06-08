@@ -12,7 +12,7 @@ class Piece < ApplicationRecord
       rook_at(0, y).update_attributes(x_position: 3, y_position: y)
     end
     update_attributes(x_position: x, y_position: y)
-    Move.create(piece_id: id)
+    Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
   end
 
   def castling_kingside?(x, y)
