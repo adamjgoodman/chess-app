@@ -5,21 +5,21 @@ class Piece < ApplicationRecord
   def move!(x, y)
     return false unless valid_move?(x, y)
 
-    if castling_kingside(x, y)
+    if castling_kingside?(x, y)
       rook_at(7, y).update_attributes(x_position: 5, y_position: y)
     end
-    if castling_queenside(x, y)
+    if castling_queenside?(x, y)
       rook_at(0, y).update_attributes(x_position: 3, y_position: y)
     end
     update_attributes(x_position: x, y_position: y)
-    # Move.create(piece_id: id)
+    Move.create(piece_id: id)
   end
 
-  def castling_kingside(x, y)
+  def castling_kingside?(x, y)
     x_position - x == -2 && y_position == y
   end
 
-  def castling_queenside(x, y)
+  def castling_queenside?(x, y)
     x_position - x == 2 && y_position == y
   end
 
