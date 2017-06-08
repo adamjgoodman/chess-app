@@ -2,7 +2,7 @@ class Pawn < Piece
   def move_valid?(x, y)
     return true if one_step_legal?(x, y)
     return true if regular_capture_legal?(x, y)
-    return true if capture_en_passan_legal(x, y)
+    return true if capture_en_passan_legal?(x, y)
     false
   end
 
@@ -66,32 +66,42 @@ class Pawn < Piece
     false
   end
 
-  def white_capture_en_passant_is_ok(x, y)
+  def white_capture_en_passant_is_ok?(x, y)
     return true if white_capture_en_passant_to_right_is_ok(x, y) || white_capture_en_passant_to_left_is_ok(x, y)
     false
   end
 
-  def white_capture_en_passant_to_right_is_ok(x, y)
-    return false unless pawn_at(x_position + 1, 4).is_black.exists? && pawn_at(x + 1, 4).moves.count != 1
+  def white_capture_en_passant_to_right_is_ok?(x, y)
+    pawn = pawn_at((x_position + 1), 4)
+    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count != 1
     return false unless x == x_position + 1 && y == 3
     true
   end
 
-  def white_capture_en_passant_to_left_is_ok(x, y)
-
+  def white_capture_en_passant_to_left_is_ok?(x, y)
+    pawn = pawn_at((x_position - 1), 4)
+    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count != 1
+    return false unless x == x_position - 1 && y == 3
+    true
   end
 
-  def black_capture_en_passant_is_ok(x, y)
+  def black_capture_en_passant_is_ok?(x, y)
     return true if black_capture_en_passant_to_right_is_ok(x, y) || black_capture_en_passant_to_left_is_ok(x, y)
     false
   end
 
-  def black_capture_en_passant_to_right_is_ok(x, y)
-
+  def black_capture_en_passant_to_right_is_ok?(x, y)
+    pawn= pawn_at((x_position -1), 3
+    return false unless pawn && !pawn.is_black && pawn_at(x - 1, 3).moves.count != 1
+    return false unless x == x_position - 1 && y == 3
+    true
   end
 
-  def black_capture_en_passant_to_left_is_ok(x, y)
-
+  def black_capture_en_passant_to_left_is_ok?(x, y)
+    pawn = pawn_at((x_position + 1), 3)
+    return false unless pawn && !pawn.is_black && pawn_at(x + 1, 3).moves.count != 1
+    return false unless x == x_position + 1 && y == 3
+    true
   end
 
 
