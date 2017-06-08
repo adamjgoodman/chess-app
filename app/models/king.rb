@@ -1,8 +1,8 @@
 class King < Piece
   def move_valid?(x, y)
     return false if space_occupied?(x, y) == true && opponent_color(x, y) == is_black?
-    # will add capture logic
     return false if legal_move?(x, y) == false
+    return false if in_check?(x, y) == true
     true
   end
 
@@ -21,10 +21,6 @@ class King < Piece
     false
   end
 
-  def opposing_king?(x, y)
-    # cannot move king to a position adjacent to his opposite
-  end
-
   def legal_move?(x, y)
     return true if diagonal_legal?(x, y)
     return true if horizontal_legal?(x, y)
@@ -32,6 +28,7 @@ class King < Piece
     false
   end
 
+  # returns true if king is in check
   def in_check?
     game.pieces.where(is_black: !is_black).each do |piece|
       return true if piece.valid_move?(x_position, y_position)
