@@ -73,14 +73,14 @@ class Pawn < Piece
 
   def white_capture_en_passant_to_right_is_ok?(x, y)
     pawn = pawn_at((x_position + 1), 4)
-    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count != 1
+    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count == 1
     return false unless x == x_position + 1 && y == 3
     true
   end
 
   def white_capture_en_passant_to_left_is_ok?(x, y)
     pawn = pawn_at((x_position - 1), 4)
-    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count != 1
+    return false unless pawn && pawn.is_black && pawn_at(x + 1, 4).moves.count == 1
     return false unless x == x_position - 1 && y == 3
     true
   end
@@ -92,14 +92,14 @@ class Pawn < Piece
 
   def black_capture_en_passant_to_right_is_ok?(x, y)
     pawn= pawn_at((x_position -1), 3
-    return false unless pawn && !pawn.is_black && pawn_at(x - 1, 3).moves.count != 1
+    return false unless pawn && !pawn.is_black && pawn_at(x - 1, 3).moves.count == 1
     return false unless x == x_position - 1 && y == 3
     true
   end
 
   def black_capture_en_passant_to_left_is_ok?(x, y)
     pawn = pawn_at((x_position + 1), 3)
-    return false unless pawn && !pawn.is_black && pawn_at(x + 1, 3).moves.count != 1
+    return false unless pawn && !pawn.is_black && pawn_at(x + 1, 3).moves.count == 1
     return false unless x == x_position + 1 && y == 3
     true
   end
