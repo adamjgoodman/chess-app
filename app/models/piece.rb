@@ -73,8 +73,4 @@ class Piece < ApplicationRecord
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
   end
-
-  def check?(x, y)
-    # add code here
-  end
 end
