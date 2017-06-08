@@ -36,7 +36,7 @@ RSpec.describe Pawn, type: :model do
     black_pawn = Pawn.create(is_black: true, x_position: 3, y_position: 4, game_id: game.id)
     white_pawn2 = Pawn.create(is_black: false, x_position: 6, y_position: 2, game_id: game.id)
     black_pawn2 = Pawn.create(is_black: true, x_position: 6, y_position: 4, game_id: game.id)
-    white_knight = Knight.create(is_black: false, x_position: 6, y_position: 3, game_id: game.id)
+    Knight.create(is_black: false, x_position: 6, y_position: 3, game_id: game.id)
 
     # pawns obstructing each other's move
     expect(white_pawn.legal_move?(3, 4)).to be false
