@@ -17,4 +17,6 @@ RSpec.describe GamesController, type: :controller do
       expect(@game.user_id_black).to eq(15)
     end
   end
+
+
 end
