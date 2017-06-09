@@ -27,9 +27,9 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     if @game.user_id_black != current_user
-      @game.update_attributes(status: 'unavailable', winner: @game.user_id_white)
+      @game.update_attributes(status: 'complete', winner: @game.user_id_white)
     else
-      @game.update_attributes(status: 'unavailable', winner: @game.user_id_black)
+      @game.update_attributes(status: 'complete', winner: @game.user_id_black)
     end
 
     redirect_to root_path
@@ -38,6 +38,6 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:user_id_black, :user_id_white, :status, :winner)
+    params.require(:game).permit(:user_id_black, :user_id_white)
   end
 end
