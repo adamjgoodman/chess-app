@@ -26,7 +26,7 @@ class GamesController < ApplicationController
   def forfeit_game
     @game = Game.find(params[:id])
 
-    if @game.user_id_black != current_user
+    if @game.user_id_black == current_user.id
       @game.update_attributes(status: 'complete', winner: @game.user_id_white)
     else
       @game.update_attributes(status: 'complete', winner: @game.user_id_black)
