@@ -1,10 +1,26 @@
 class Piece < ApplicationRecord
   belongs_to :game
+  has_many :moves
 
   def move!(x, y)
     return false unless valid_move?(x, y)
-    update_attributes(x_position: new_x, y_position: new_y)
-    # Move.create(piece_id: id)
+
+    if castling_kingside?(x, y)
+      rook_at(7, y).update_attributes(x_position: 5, y_position: y)
+    end
+    if castling_queenside?(x, y)
+      rook_at(0, y).update_attributes(x_position: 3, y_position: y)
+    end
+    update_attributes(x_position: x, y_position: y)
+    Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
+  end
+
+  def castling_kingside?(x, y)
+    x_position - x == -2 && y_position == y
+  end
+
+  def castling_queenside?(x, y)
+    x_position - x == 2 && y_position == y
   end
 
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
@@ -71,5 +87,14 @@ class Piece < ApplicationRecord
     return horizontal_obstructed?(x, y) if horizontal_move?(x, y)
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
+  end
+
+  def rook_at(x, y)
+    piece = piece_at(x, y)
+    piece && piece.type == 'Rook' ? piece : nil
+  end
+
+  def piece_at(x, y)
+    game.pieces.where(x_position: x, y_position: y).first
   end
 end
