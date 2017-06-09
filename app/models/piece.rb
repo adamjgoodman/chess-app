@@ -81,4 +81,19 @@ class Piece < ApplicationRecord
     return diagonal_obstructed?(x, y) if diagonal_move?(x, y)
     false
   end
+
+  def rook_at(x, y)
+    piece = piece_at(x, y)
+    piece && piece.type == 'Rook' ? piece : nil
+  end
+
+  def pawn_at(x, y)
+    piece = piece_at(x, y)
+    piece && piece.type == 'pawn' ? piece : nil
+  end
+
+  def piece_at(x, y)
+    game.pieces.where(x_position: x, y_position: y).first
+  end
+  end
 end
