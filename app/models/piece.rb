@@ -3,7 +3,7 @@ class Piece < ApplicationRecord
   has_many :moves
 
   def move!(x, y)
-    return false unless valid_move?(x, y)
+    return false unless move_valid?(x, y)
 
     if castling_kingside?(x, y)
       rook_at(7, y).update_attributes(x_position: 5, y_position: y)
@@ -28,17 +28,14 @@ class Piece < ApplicationRecord
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
   end
 
-  def opponent_color(x, y) # returns true for black and false for white
+  def opponent_color(x, y)
     game.pieces.find_by(x_position: x, y_position: y).is_black
   end
 
-  # checking to see if the square we want is occupied by a piece of the same color or opponent color
-  def space_occupied_by_opponent_color_piece?(x, y)
-    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, opponent_color(x, y)).exists?
-  end
-
-  def space_occupied_by_same_color_piece?(x, y)
-    game.pieces.where('x_position = ? AND y_position = ? AND is_black = ?', x, y, !opponent_color(x, y)).exists?
+  # checking to see if the square we want is occupied by a piece of the opponent's color
+  def space_occupied_by_opponent?(x, y)
+    other_piece = game.pieces.where(x_position: x, y_position: y).first
+    other_piece && other_piece.is_black != is_black
   end
 
   # checking to see what type of move -- vertical, horizontal, or diagonal
