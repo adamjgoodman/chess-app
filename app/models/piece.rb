@@ -15,6 +15,7 @@ class Piece < ApplicationRecord
 
   def opponent_color(x, y) # returns true for black and false for white
     game.pieces.find_by(x_position: x, y_position: y).is_black
+  end
 
   # checking to see if the square we want is occupied by a piece of the same color or opponent color
   def space_occupied_by_opponent_color_piece?(x, y)
