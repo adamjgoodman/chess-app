@@ -4,12 +4,7 @@ class Piece < ApplicationRecord
 
   def move!(x, y)
     return false unless move_valid?(x, y)
-    if castling_kingside?(x, y)
-      rook_at(7, y).update_attributes(x_position: 5, y_position: y)
-    end
-    if castling_queenside?(x, y)
-      rook_at(0, y).update_attributes(x_position: 3, y_position: y)
-    end
+    update_rook_if_castling(x, y)
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
     update_attributes(type: 'Queen') if promoting_pawn?(y)
@@ -17,6 +12,11 @@ class Piece < ApplicationRecord
 
   def promoting_pawn?(y)
     type == 'Pawn' && y == 7 || y.zero?
+  end
+
+  def update_rook_if_castling(x, y)
+    rook_at(7, y).update_attributes(x_position: 5, y_position: y) if castling_kingside?(x, y)
+    rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?(x, y)
   end
 
   def castling_kingside?(x, y)
