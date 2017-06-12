@@ -102,7 +102,7 @@ class Piece < ApplicationRecord
 
   def pawn_at(x, y)
     piece = piece_at(x, y)
-    piece && piece.type == 'pawn' ? piece : nil
+    piece && piece.type == 'Pawn' ? piece : nil
   end
 
   def piece_at(x, y)
