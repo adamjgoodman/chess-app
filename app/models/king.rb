@@ -40,3 +40,7 @@ class King < Piece
     '&#9818;'
   end
 end
+
+# game.pieces.where(is_black: is_black)
+# if moving that piece opens an unobstructed path to the king for game.pieces.where(is_black: !is_black)
+# then you cannot move that piece because you will be placing your own king in check
