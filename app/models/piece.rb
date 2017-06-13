@@ -11,7 +11,7 @@ class Piece < ApplicationRecord
   end
 
   def promoting_pawn?(y)
-    type == 'Pawn' && y == 7 || y.zero?
+    type == 'Pawn' && (y == 7 || y.zero?)
   end
 
   def update_rook_if_castling(x, y)
