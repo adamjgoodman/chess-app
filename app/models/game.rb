@@ -24,6 +24,7 @@ class Game < ApplicationRecord
   end
 
   # rubocop:disable MethodLength
+  # rubocop:disable Metrics/AbcSize
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
