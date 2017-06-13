@@ -23,6 +23,29 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
+  # is game in check?
+  def in_check?(x, y)
+      # identify the kings on the board
+      pieces.where(type: "King", is_black: is_black, x_position: x, y_position: y)
+      pieces.where(is_black: !is_black).each do |piece|
+        return true if piece.valid_move?(x, y)
+      end
+
+
+      # see if any of the opposing pieces can approach the enemy king
+
+      # if they can, then the game is in check
+  end
+
+
+  # game.pieces.where(is_black: is_black)
+  # if moving that piece opens an unobstructed path to the king for game.pieces.where(is_black: !is_black)
+  # then you cannot move that piece because you will be placing your own king in check
+  # if move!(x, y)
+
+  # drag and drop should call valid move
+  # did this move put my king in check?
+
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable MethodLength
   def initialize_board
