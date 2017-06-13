@@ -23,18 +23,16 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
-  # is game in check?
-  def in_check?(x, y)
+  # returns true if game is in check
+  def game_in_check?
       # identify the kings on the board
       pieces.where(type: "King", is_black: is_black, x_position: x, y_position: y)
+      # selects pieces opposing the king and looks to see if they have an open
+      # route to the king
       pieces.where(is_black: !is_black).each do |piece|
         return true if piece.valid_move?(x, y)
       end
-
-
-      # see if any of the opposing pieces can approach the enemy king
-
-      # if they can, then the game is in check
+      false
   end
 
 
