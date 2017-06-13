@@ -3,16 +3,20 @@ class Piece < ApplicationRecord
   has_many :moves
 
   def move!(x, y)
-    return false unless valid_move?(x, y)
-
-    if castling_kingside?(x, y)
-      rook_at(7, y).update_attributes(x_position: 5, y_position: y)
-    end
-    if castling_queenside?(x, y)
-      rook_at(0, y).update_attributes(x_position: 3, y_position: y)
-    end
+    return false unless move_valid?(x, y)
+    update_rook_if_castling(x, y)
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
+    update_attributes(type: 'Queen') if promoting_pawn?(y)
+  end
+
+  def promoting_pawn?(y)
+    type == 'Pawn' && (y == 7 || y.zero?)
+  end
+
+  def update_rook_if_castling(x, y)
+    rook_at(7, y).update_attributes(x_position: 5, y_position: y) if castling_kingside?(x, y)
+    rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?(x, y)
   end
 
   def castling_kingside?(x, y)
@@ -28,8 +32,14 @@ class Piece < ApplicationRecord
     game.pieces.where('x_position = ? AND y_position = ?', x, y).present?
   end
 
-  def opponent_color(x, y) # returns true for black and false for white
+  def opponent_color(x, y)
     game.pieces.find_by(x_position: x, y_position: y).is_black
+  end
+
+  # checking to see if the square we want is occupied by a piece of the opponent's color
+  def space_occupied_by_opponent?(x, y)
+    other_piece = game.pieces.where(x_position: x, y_position: y).first
+    other_piece && other_piece.is_black != is_black
   end
 
   # checking to see what type of move -- vertical, horizontal, or diagonal
@@ -92,6 +102,11 @@ class Piece < ApplicationRecord
   def rook_at(x, y)
     piece = piece_at(x, y)
     piece && piece.type == 'Rook' ? piece : nil
+  end
+
+  def pawn_at(x, y)
+    piece = piece_at(x, y)
+    piece && piece.type == 'Pawn' ? piece : nil
   end
 
   def piece_at(x, y)

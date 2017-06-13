@@ -23,7 +23,6 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable MethodLength
   def initialize_board
     # Building out white pieces
