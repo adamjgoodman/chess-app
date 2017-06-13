@@ -23,8 +23,16 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
   end
 
-  def new
-    @game = Game.new
+  def forfeit_game
+    @game = Game.find(params[:id])
+
+    if @game.user_id_black == current_user.id
+      @game.update_attributes(status: 'complete', winner: @game.user_id_white)
+    else
+      @game.update_attributes(status: 'complete', winner: @game.user_id_black)
+    end
+
+    redirect_to root_path
   end
 
   private

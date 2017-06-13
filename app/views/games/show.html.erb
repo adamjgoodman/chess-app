@@ -14,6 +14,7 @@
   <% end %>
 </table>
 
+
 <script type="text/javascript">
   $(document).ready(function () {
     $(".draggable").draggable({
@@ -26,3 +27,8 @@
     })
   } );
 </script>
+
+
+<%= link_to 'Forefeit Game', forfeit_game_game_path, method: :post, data: {confirm: 'Are you sure you want to forfeit?'},class: 'btn btn-secondary' %>
+
+

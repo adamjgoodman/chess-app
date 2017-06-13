@@ -2,6 +2,7 @@ class Game < ApplicationRecord
   belongs_to :user_black, class_name: 'User', foreign_key: 'user_id_black', optional: true
   belongs_to :user_white, class_name: 'User', foreign_key: 'user_id_white', optional: true
   has_many :pieces
+  has_many :moves
 
   scope :available, (-> { where(status: 'available') })
 
@@ -22,8 +23,8 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
-  # rubocop:disable Metrics/AbcSize
   # rubocop:disable MethodLength
+  # rubocop:disable Metrics/AbcSize
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
