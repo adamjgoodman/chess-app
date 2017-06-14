@@ -61,6 +61,7 @@ class Game < ApplicationRecord
     King.create(is_black: true, x_position: 4, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
     Queen.create(is_black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
   end
+
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
 
