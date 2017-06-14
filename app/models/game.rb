@@ -24,20 +24,51 @@ class Game < ApplicationRecord
   end
 
   # returns true if game is in check
-  def game_in_check?
-      # identify the kings on the board
-      pieces.where(type: "King", is_black: is_black, x_position: x, y_position: y)
-      # selects pieces opposing the king and looks to see if they have an open
-      # route to the king
-      pieces.where(is_black: !is_black).each do |piece|
-        return true if piece.valid_move?(x, y)
+  def black_in_check?(x, y)
+      # identify the black kings on the board
+      King.where(is_black: true, x_position: x, y_position: y)
+      # selects white pieces and looks to see if
+      # they have an open route to the king
+      pieces.where(is_black: false).each do |piece|
+        return true if piece.move_valid?(x, y)
       end
       false
   end
 
 
-  # game.pieces.where(is_black: is_black)
-  # if moving that piece opens an unobstructed path to the king for game.pieces.where(is_black: !is_black)
+  def white_in_check?(x, y)
+      # identify the white kings on the board
+      King.where(is_black: false, x_position: x, y_position: y)
+      # selects black pieces and looks to see if
+      # they have an open route to the king
+      pieces.where(is_black: true).each do |piece|
+        return true if piece.move_valid?(x, y)
+      end
+      false
+  end
+
+  def black_kings_in_check?
+      King.where(is_black: true).each do |check|
+        return true if black_in_check?(x, y)
+     end
+     false
+  end
+
+  def white_kings_in_check?(x, y)
+    King.where(is_black: false).each do |check|
+      return true if white_in_check?(x, y)
+    end
+    false
+  end
+
+  def game_in_check?
+    return true if white_kings_in_check?(x, y) || black_kings_in_check?(x, y)
+    false
+  end
+
+   # game.pieces.where(is_black: is_black)
+  # if moving that piece opens an unobstructed path to the king for
+  # pieces.where(is_black: !is_black)
   # then you cannot move that piece because you will be placing your own king in check
   # if move!(x, y)
 
@@ -46,6 +77,7 @@ class Game < ApplicationRecord
 
   # rubocop:disable Metrics/AbcSize
   # rubocop:disable MethodLength
+
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
