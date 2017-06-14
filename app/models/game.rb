@@ -60,6 +60,56 @@ class Game < ApplicationRecord
     King.create(is_black: true, x_position: 4, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
     Queen.create(is_black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
   end
+
+
+
+  def checkmate(is_black)
+    #check to see color kind is in check
+    king = pieces.where(type: King, is_black: is_black).first
+    return false unless king.check
+
+#array of active pieces of certain color
+    active_pieces = pieces_active(is_black)
+
+    active_pieces.each do |piece|
+      (0..7).each do |x|
+        (0..7).each do |y|
+          prev_x = piece.x_position
+          prev_y = piece.y_position
+
+          if piece.move_valid?(x, y)
+            piece.update_attributes(x_position: x, y_position: y)
+            return false if !king.check
+            piece.update_attributes(prev_x, prev_y)
+          end
+
+        end
+      end
+    end
+
+    true
+
+
+  end
+
+  def stalemate(is_black)
+    active_pieces = pieces_active(is_black)
+ 
+    active_pieces.each do |piece|
+      (0..7).each do |x|
+        (0..7).each do |y|
+          return false if piece.move_valid?(x, y)
+        end
+      end
+    end
+    true
+  end
+
+  def pieces_active(is_black)
+     pieces.where('is_black = ? AND status = ?', is_black, 'active').to_a
+  end
+
+
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
 end

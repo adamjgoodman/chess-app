@@ -58,6 +58,10 @@ class King < Piece
     false
   end
 
+  def check
+    return true
+  end
+
   def unicode
     '&#9818;'
   end
