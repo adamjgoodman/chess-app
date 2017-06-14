@@ -10,5 +10,3 @@ FactoryGirl.define do
     status 'completed'
   end
 end
-
-

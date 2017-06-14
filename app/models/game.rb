@@ -25,37 +25,36 @@ class Game < ApplicationRecord
 
   # returns true if game is in check
   def black_in_check?(x, y)
-      # identify the black kings on the board
-      King.where(is_black: true, x_position: x, y_position: y)
-      # selects white pieces and looks to see if
-      # they have an open route to the king
-      pieces.where(is_black: false).each do |piece|
-        return true if piece.move_valid?(x, y)
-      end
-      false
+    # identify the black kings on the board
+    King.where(is_black: true, x_position: x, y_position: y)
+    # selects white pieces and looks to see if
+    # they have an open route to the king
+    pieces.where(is_black: false).each do |piece|
+      return true if piece.move_valid?(x, y)
+    end
+    false
   end
 
-
   def white_in_check?(x, y)
-      # identify the white kings on the board
-      King.where(is_black: false, x_position: x, y_position: y)
-      # selects black pieces and looks to see if
-      # they have an open route to the king
-      pieces.where(is_black: true).each do |piece|
-        return true if piece.move_valid?(x, y)
-      end
-      false
+    # identify the white kings on the board
+    King.where(is_black: false, x_position: x, y_position: y)
+    # selects black pieces and looks to see if
+    # they have an open route to the king
+    pieces.where(is_black: true).each do |piece|
+      return true if piece.move_valid?(x, y)
+    end
+    false
   end
 
   def black_kings_in_check?
-      King.where(is_black: true).each do |check|
-        return true if black_in_check?(x, y)
-     end
-     false
+    King.where(is_black: true).each do |_check|
+      return true if black_in_check?(x, y)
+    end
+    false
   end
 
   def white_kings_in_check?(x, y)
-    King.where(is_black: false).each do |check|
+    King.where(is_black: false).each do |_check|
       return true if white_in_check?(x, y)
     end
     false
@@ -66,7 +65,7 @@ class Game < ApplicationRecord
     false
   end
 
-   # game.pieces.where(is_black: is_black)
+  # game.pieces.where(is_black: is_black)
   # if moving that piece opens an unobstructed path to the king for
   # pieces.where(is_black: !is_black)
   # then you cannot move that piece because you will be placing your own king in check
