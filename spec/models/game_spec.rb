@@ -8,4 +8,15 @@ RSpec.describe Game, type: :model do
     available_games = Game.available
     expect(available_games.size).to eq 2
   end
+
+  it 'should detect stalemate' do
+    game = Game.create
+    Pawn.create(is_black: false, x_position: 3, y_position: 3, game_id: game.id, status: 'active')
+    pawn2 = Pawn.create(is_black: true, x_position: 3, y_position: 4, game_id: game.id, status: 'active')
+    pawn3 = Pawn.create(is_black: false, x_position: 5, y_position: 4, game_id: game.id, status: 'active')
+
+    # White is in stalemate (returns true) and Black is not (returns false)
+    expect(game.stalemate(pawn2.is_black)).to eq true
+    expect(game.stalemate(pawn3.is_black)).to eq false
+  end
 end
