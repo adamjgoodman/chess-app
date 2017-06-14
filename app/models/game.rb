@@ -89,14 +89,14 @@ class Game < ApplicationRecord
   end
 
   def black_kings_in_check?
-    King.where(is_black: true).each do |_check|
+    King.where(is_black: true).each do
       return true if black_in_check?(x, y)
     end
     false
   end
 
   def white_kings_in_check?(x, y)
-    King.where(is_black: false).each do |_check|
+    King.where(is_black: false).each do
       return true if white_in_check?(x, y)
     end
     false
