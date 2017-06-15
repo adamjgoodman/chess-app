@@ -67,13 +67,15 @@ class Game < ApplicationRecord
 
   def black_in_check?
     # identify the black king on the board
-    pieces.active.where(type: 'King', is_black: true).in_check?
+    king = pieces.active.where(type: 'King', is_black: true)
+    king.in_check?
     # calls the in_check? method in king.rb
   end
 
   def white_in_check?
     # identify the white kings on the board and calls on the in_check method in king.rb
-    pieces.active.where(type: 'King', is_black: false).in_check?
+    king = pieces.active.where(type: 'King', is_black: false)
+    king.in_check?
   end
 
   # returns true if game is in check

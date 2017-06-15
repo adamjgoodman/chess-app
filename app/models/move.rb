@@ -3,10 +3,9 @@ class Move < ApplicationRecord
   belongs_to :piece
 
   def turn
-    if game.moves.count % 2 == 0
-      return user_id_white
+    return user_id_white if game.moves.count % 2 == 0
     else
-      return user_id_black
+      user_id_black
     end
   end
 
