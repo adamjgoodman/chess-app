@@ -65,33 +65,21 @@ class Game < ApplicationRecord
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
 
-  # returns true if game is in check
   def black_in_check?
     # identify the black king on the board
-    king = pieces.active.where(type: 'King', is_black: true)
+    pieces.active.where(type: 'King', is_black: true).in_check?
     # calls the in_check? method in king.rb
-    king.in_check?
   end
 
   def white_in_check?
-    # identify the white kings on the board
-    king = pieces.active.where(type: 'King', is_black: false)
-    # calls in_check method from king.rb
-    king.in_check?
+    # identify the white kings on the board and calls on the in_check method in king.rb
+    pieces.active.where(type: 'King', is_black: false).in_check?
   end
 
+  # returns true if game is in check
   def game_in_check?
     return true if white_in_check?
     return true if black_in_check?
     false
   end
-
-  # game.pieces.where(is_black: is_black)
-  # if moving that piece opens an unobstructed path to the king for
-  # pieces.where(is_black: !is_black)
-  # then you cannot move that piece because you will be placing your own king in check
-  # if move!(x, y)
-
-  # drag and drop should call valid move
-  # did this move put my king in check?
 end
