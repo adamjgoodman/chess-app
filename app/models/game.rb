@@ -66,31 +66,23 @@ class Game < ApplicationRecord
   # rubocop:enable MethodLength
 
   # returns true if game is in check
-  def black_in_check?(x, y)
+  def black_in_check?
     # identify the black king on the board
-    King.active.where(is_black: true, x_position: x, y_position: y)
-    # selects white pieces and looks to see if
-    # they have an open route to the black king
-    pieces.active.where(is_black: false).each do |piece|
-      return true if piece.move_valid?(x, y)
-    end
-    false
+    king = King.active.where(is_black: true)
+    # calls the in_check? method in king.rb
+    king.in_check?
   end
 
-  def white_in_check?(x, y)
+  def white_in_check?
     # identify the white kings on the board
-    King.active.where(is_black: false, x_position: x, y_position: y)
-    # selects black pieces and looks to see if
-    # they have an open route to the white king
-    pieces.active.where(is_black: true).each do |piece|
-      return true if piece.move_valid?(x, y)
-    end
-    false
+    king = King.active.where(is_black: false)
+    # calls in_check method from king.rb
+    king.in_check?
   end
 
-  def game_in_check?(x, y)
-    return true if white_in_check?(x, y) == true
-    return true if black_in_check?(x, y) == true
+  def game_in_check?
+    return true if white_in_check?
+    return true if black_in_check?
     false
   end
 
