@@ -11,4 +11,9 @@ RSpec.describe Move, type: :model do
     expect(game.pieces.where(x_position: 4, y_position: 7).first.type).to eq 'Queen'
     expect(game.pieces.where(x_position: 3, y_position: 0).first.type).to eq 'Queen'
   end
+
+  # it 'should return the user_id of the current turn'
+  #   game = Game.create(active: true)
+
+  # end
 end
