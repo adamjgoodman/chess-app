@@ -112,4 +112,9 @@ class Piece < ApplicationRecord
   def piece_at(x, y)
     game.pieces.where(x_position: x, y_position: y).first
   end
+
+  def friendly_piece_at?(x, y)
+    piece = piece_at(x, y)
+    piece && piece.is_black == is_black
+  end
 end
