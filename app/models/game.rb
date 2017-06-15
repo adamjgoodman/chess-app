@@ -67,11 +67,11 @@ class Game < ApplicationRecord
 
   # returns true if game is in check
   def black_in_check?(x, y)
-    # identify the black kings on the board
-    King.where(is_black: true, x_position: x, y_position: y, status: 'active')
+    # identify the black king on the board
+    King.active.where(is_black: true, x_position: x, y_position: y)
     # selects white pieces and looks to see if
-    # they have an open route to the king
-    pieces.where(is_black: false, status: 'active').each do |piece|
+    # they have an open route to the black king
+    pieces.active.where(is_black: false).each do |piece|
       return true if piece.move_valid?(x, y)
     end
     false
@@ -79,17 +79,18 @@ class Game < ApplicationRecord
 
   def white_in_check?(x, y)
     # identify the white kings on the board
-    King.where(is_black: false, x_position: x, y_position: y, status: 'active')
+    King.active.where(is_black: false, x_position: x, y_position: y)
     # selects black pieces and looks to see if
-    # they have an open route to the king
-    pieces.where(is_black: true, status: 'active').each do |piece|
+    # they have an open route to the white king
+    pieces.active.where(is_black: true).each do |piece|
       return true if piece.move_valid?(x, y)
     end
     false
   end
 
-  def game_in_check?
-    return true if white_in_check?(x, y) || black_in_check?(x, y)
+  def game_in_check?(x, y)
+    return true if white_in_check?(x, y) == true
+    return true if black_in_check?(x, y) == true
     false
   end
 
