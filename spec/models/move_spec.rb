@@ -12,8 +12,9 @@ RSpec.describe Move, type: :model do
     expect(game.pieces.where(x_position: 3, y_position: 0).first.type).to eq 'Queen'
   end
 
-  # it 'should return the user_id of the current turn'
-  #   game = Game.create(active: true)
-
-  # end
+  it "should return the user_id of the current color's turn" do
+    game = Game.create(active: true, user_id_black: 51, user_id_white: 52)
+    game.moves.count == 24
+    expect(game.turn).to eq 52
+  end
 end

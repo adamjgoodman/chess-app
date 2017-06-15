@@ -26,8 +26,8 @@ RSpec.describe Game, type: :model do
 
   it 'should determine that the game is not in check' do
     game = Game.create(status: 'available')
-    King.active.create(type: 'King', is_black: true, x_position: 8, y_position: 8, game_id: game.id)
-    Bishop.active.create(type: 'Bishop', is_black: false, x_position: 7, y_position: 7, game_id: game.id, status: 'active')
+    King.active.create(is_black: true, x_position: 8, y_position: 8, game_id: game.id, status: 'captured')
+    Bishop.active.create(is_black: false, x_position: 7, y_position: 7, game_id: game.id, status: 'active')
     expect(game.game_in_check?).to eq false
   end
 end
