@@ -2,6 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game
   has_many :moves
 
+  # rubocop:disable Metrics/AbcSize
   def move!(x, y)
     return false unless move_valid?(x, y)
     update_rook_if_castling(x, y)
@@ -14,9 +15,10 @@ class Piece < ApplicationRecord
     update_move_if_promoting_pawn(x, y)
     update_move_if_king_is_in_check
   end
+  # rubocop:enable Metrics/AbcSize
 
   def capture?(x, y)
-    return true if opponent_piece at (x, y)
+    return true if opponent_piece at(x, y)
     false
   end
 
@@ -38,7 +40,7 @@ class Piece < ApplicationRecord
   end
 
   def update_move_if_king_is_in_check
-    move.last.update_attributes(check: true) if game.pieces.type == king.where(king.in_check?)
+    moves.last.update_attributes(check: true) if game_in_check?
   end
 
   def promoting_pawn?(y)
