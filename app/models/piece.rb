@@ -12,6 +12,7 @@ class Piece < ApplicationRecord
     update_move_if_castling(x, y)
     update_move_if_capture(x, y)
     update_move_if_promoting_pawn(x, y)
+    update_move_if_king_is_in_check
   end
 
   def capture?(x, y)
@@ -34,6 +35,10 @@ class Piece < ApplicationRecord
 
   def update_move_if_promoting_pawn(x, y)
     move.last.update_attributes(action: 'promotes pawn') if promoting_pawn?(x, y)
+  end
+
+  def update_move_if_king_is_in_check
+    move.last.update_attributes(check: true) if game.pieces.type == king.where(king.in_check?)
   end
 
   def promoting_pawn?(y)
