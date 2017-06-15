@@ -5,9 +5,35 @@ class Piece < ApplicationRecord
   def move!(x, y)
     return false unless move_valid?(x, y)
     update_rook_if_castling(x, y)
+    update_opponent_if_capture
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
     update_attributes(type: 'Queen') if promoting_pawn?(y)
+    update_move_if_castling(x, y)
+    update_move_if_capture(x, y)
+    update_move_if_promoting_pawn(x, y)
+  end
+
+  def capture?(x, y)
+    return true if opponent_piece at (x, y)
+    false
+  end
+
+  def update_opponent_if_capture(x, y)
+    piece_at(x, y).update_attributes(x_position: 8, y_position: 8, status: 'captured') if capture?(x, y)
+  end
+
+  def update_move_if_castling(x, y)
+    move.last.update_attributes(action: 'castles kingside') if castling_kingside?(x, y)
+    move.last.update_attributes(action: 'castles queenside') if castling_queenside?(x, y)
+  end
+
+  def update_move_if_capture(x, y)
+    move.last.update_attributes(action: 'captures piece') if capture?(x, y)
+  end
+
+  def update_move_if_promoting_pawn(x, y)
+    move.last.update_attributes(action: 'promotes pawn') if promoting_pawn?(x, y)
   end
 
   def promoting_pawn?(y)
@@ -116,5 +142,10 @@ class Piece < ApplicationRecord
   def friendly_piece_at?(x, y)
     piece = piece_at(x, y)
     piece && piece.is_black == is_black
+  end
+
+  def opponent_piece_at?(x, y)
+    piece = piece_at(x, y)
+    piece && piece.is_black == !is_black
   end
 end
