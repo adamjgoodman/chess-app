@@ -87,17 +87,13 @@ class Game < ApplicationRecord
   #   false
   # end
 
-  def black_in_check?
+  def game_in_check?
     # identify the black king on the board
     black_king = King.active.where(is_black: true).first
-    black_king.in_check?
-    # calls the in_check? method in king.rb
-  end
-
-  def white_in_check?
-    # identify the white kings on the board and calls on the in_check method in king.rb
     white_king = King.active.where(is_black: false).first
-    white_king.in_check?
+    return true if white_king.in_check?
+    return true if black_king.in_check?
+    false
   end
 
 end
