@@ -4,9 +4,6 @@ class Move < ApplicationRecord
 
   def turn
     return user_id_white if game.moves.count % 2 == 0
-    else
-      user_id_black
-    end
+     user_id_black
   end
-
 end
