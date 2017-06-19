@@ -13,6 +13,7 @@ class Piece < ApplicationRecord
     update_move_if_castling(x, y)
     update_move_if_capture(x, y)
     update_move_if_promoting_pawn(x, y)
+    update_move_if_capture_en_passant(x, y)
     update_move_if_king_is_in_check
   end
   # rubocop:enable Metrics/AbcSize
@@ -37,6 +38,10 @@ class Piece < ApplicationRecord
 
   def update_move_if_promoting_pawn(x, y)
     move.last.update_attributes(action: 'promotes pawn') if promoting_pawn?(x, y)
+  end
+
+  def update_move_if_capture_en_passant(x, y)
+    move.last.update_attributes(action: 'captures en passant') if capture?(x, y) && pawn.capture_en_passant_legal?(x, y)
   end
 
   def update_move_if_king_is_in_check
