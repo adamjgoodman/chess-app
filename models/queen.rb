@@ -1,7 +1,7 @@
 class Queen < Piece
   def move_valid?(x, y)
     return false if legal_move?(x, y) == false
-    return false if opponent_occupied(x, y) == false
+    return false if opponent_occupied?(x, y) == false
     true
   end
 
@@ -29,9 +29,13 @@ class Queen < Piece
 
   # evaluates false if the piece in the space is an ally
   def opponent_occupied?(x, y)
-    return false if opponent_color(x, y) == is_black?
+    return false if space_occupied?(x, y) == true && opponent_color(x, y) == is_black
     true
   end
+
+  # def self_check?(x, y)
+  #   if piece.user_id = user_id_black
+  # end
 
   def unicode
     '&#9819;'

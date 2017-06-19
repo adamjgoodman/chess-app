@@ -1,8 +1,8 @@
 class King < Piece
   def move_valid?(x, y)
-    return false if space_occupied?(x, y) == true && opponent_color(x, y) == is_black?
-    # will add capture logic
+    return false if space_occupied?(x, y) == true && opponent_color(x, y) == is_black
     return false if legal_move?(x, y) == false
+    return false if in_check? == true
     true
   end
 
@@ -21,14 +21,40 @@ class King < Piece
     false
   end
 
-  def opposing_king?(x, y)
-    # cannot move king to a position adjacent to his opposite
-  end
+  # def castle_kingside_legal?(x, y)
+  #   return false if !rook_at(7, y) || rook_at(7, y).moves.count != 0
+  #   return true if x == 6
+  #   false
+  # end
+
+  # def castle_queenside_legal?(x, y)
+  #   return false if !rook_at(0, y) || rook_at(0, y).moves.count != 0
+  #   return false if space_occupied?(1, 0)
+  #   return true if x == 2
+  #   false
+  # end
+
+  # def castle_legal?(x, y)
+  #   # if the king has previously moved, castling is illegal:
+  #   return false if moves.count != 0
+  #   return false if horizontal_obstructed?(x, y)
+  #   return true if castle_kingside_legal?(x, y) || castle_queenside_legal?(x, y)
+  #   false
+  # end
 
   def legal_move?(x, y)
     return true if diagonal_legal?(x, y)
     return true if horizontal_legal?(x, y)
     return true if vertical_legal?(x, y)
+    # return true if castle_legal?(x, y)
+    false
+  end
+
+  # returns true if king is in check
+  def in_check?
+    game.pieces.where(is_black: !is_black).each do |piece|
+      return true if piece.move_valid?(x_position, y_position)
+    end
     false
   end
 
@@ -36,3 +62,7 @@ class King < Piece
     '&#9818;'
   end
 end
+
+# game.pieces.where(is_black: is_black)
+# if moving that piece opens an unobstructed path to the king for game.pieces.where(is_black: !is_black)
+# then you cannot move that piece because you will be placing your own king in check
