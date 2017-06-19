@@ -35,7 +35,7 @@
            dataType: 'json',
            data: { id: id, x_position: x, y_position: y},
            success: function(data){
-            $(location).attr('href', data);
+            location.reload();
            }
         });
 

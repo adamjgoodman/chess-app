@@ -3,9 +3,7 @@ class PiecesController < ApplicationController
     @piece = Piece.find(params[:id])
     new_x = params[:x_position].to_i
     new_y = params[:y_position].to_i
-
-    return render json: 'success' if @piece.move!(new_x, new_y)
-    render json: 'failure'
+    render json: { error: 0, success: 1 } if @piece.move!(new_x, new_y)
   end
 
   private
