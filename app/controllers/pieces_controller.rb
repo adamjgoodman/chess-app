@@ -6,9 +6,7 @@ class PiecesController < ApplicationController
 
     response = @piece.move!(new_x, new_y)
 
-    if response == false
-      flash[:error] = "Invalid moves!"
-    end
+    flash[:error] = 'Invalid moves!' if response != nil
 
     render json: { error: 0, success: 1 }
   end
@@ -18,6 +16,4 @@ class PiecesController < ApplicationController
   def piece_params
     params.require(:piece).permit(:x_position, :y_position)
   end
-end 
-
-
+end
