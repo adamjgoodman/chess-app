@@ -1,5 +1,6 @@
 <h1>Chessboard</h1>
 
+
 <table id='chessboard'>
   <% ((7).downto(0)).each do |y| %>
     <tr>
@@ -36,6 +37,9 @@
            data: { id: id, x_position: x, y_position: y},
            success: function(data){
             location.reload();
+           },
+           error: function (errMsg) {
+            alert('Invalid Move!');
            }
         });
 
