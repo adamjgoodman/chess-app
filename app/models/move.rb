@@ -3,7 +3,7 @@ class Move < ApplicationRecord
   belongs_to :piece
 
   def turn
-    return user_id_white if game.moves.count % 2 == 0
+    return user_id_white if game.moves.count.even?
     user_id_black
   end
 end
