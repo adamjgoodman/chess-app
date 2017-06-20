@@ -1,5 +1,8 @@
-<h1>Chessboard</h1>
+</br>
+</br>
+</br>
 
+<h1>Chessboard</h1>
 
 <table id='chessboard'>
   <% ((7).downto(0)).each do |y| %>
@@ -34,13 +37,12 @@
           type: 'PUT',
            url: '/pieces/' + id,
            dataType: 'json',
-           data: { id: id, x_position: x, y_position: y},
+           data: { id: id, x_position: x, y_position: y },
            success: function(data){
-            location.reload();
-           },
-           error: function (errMsg) {
-            alert('Invalid Move!');
-           }
+             location.reload();
+          }
+
+
         });
 
         // $(this).append(ui.draggable);
