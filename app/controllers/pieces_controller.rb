@@ -6,7 +6,7 @@ class PiecesController < ApplicationController
 
     response = @piece.move!(new_x, new_y)
 
-    flash[:error] = 'Invalid moves!' if response != nil
+    flash[:error] = 'Invalid moves!' unless response.nil?
 
     render json: { error: 0, success: 1 }
   end
