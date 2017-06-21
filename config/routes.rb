@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   		post :forfeit_game
   	end
   end
+
+  resources :pieces, only: [:update]
+
 end
