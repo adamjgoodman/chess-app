@@ -25,7 +25,6 @@ class GamesController < ApplicationController
     # if @game.stalemate(current_user.id == @game.user_id_black)
     #   @game.update_attributes(status: 'Stalemate')
     # end
-
   end
 
   def forfeit_game

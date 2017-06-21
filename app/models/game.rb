@@ -75,12 +75,8 @@ class Game < ApplicationRecord
       end
     end
     true
-  end
+  end # returns an array of a color's active pieces
 
-
-
-
-  # returns an array of a color's active pieces
   def pieces_active(is_black)
     pieces.where('is_black = ? AND status = ?', is_black, 'active')
   end
