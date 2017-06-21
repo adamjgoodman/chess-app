@@ -17,6 +17,25 @@
     <% end %>
   <% end %>
 </table>
+<br />
+<br />
+<h2 class= 'text-center'>Moves</h3>
+    <table class="table">
+        <tr>
+          <th>Move Number</th>
+          <th>White's Move</th>
+          <th>Black's Move</th>
+        </tr>
+        <% if @moves %>
+          <% @moves.each_slice(2).each_with_index do |pair, index| %>
+              <tr>
+                  <td><%= index + 1 %></td>
+                  <td><%= pair.first.to_algebra %></td>
+                  <td><%= pair.last.to_algebra %> </td>
+              </tr>
+          <% end %>
+        <% end %>
+    </table>
 
 
 <script>
@@ -25,14 +44,14 @@
       helper: "clone",
     });
     $(".droppable").droppable({
-      
+
       drop: function( event, ui) {
-        
+
         var id = ui.draggable.data('id')
         var x = $(this).data('x')
         var y = $(this).data('y')
-      
-        
+
+
         $.ajax({
           type: 'PUT',
            url: '/pieces/' + id,

@@ -51,6 +51,4 @@ class Move < ApplicationRecord
     else
             destination
     end
-
-
 end
