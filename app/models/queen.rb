@@ -33,6 +33,10 @@ class Queen < Piece
     true
   end
 
+  # def self_check?(x, y)
+  #   if piece.user_id = user_id_black
+  # end
+
   def unicode
     '&#9819;'
   end

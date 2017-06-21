@@ -2,6 +2,8 @@ class Piece < ApplicationRecord
   belongs_to :game
   has_many :moves
 
+  scope :active, (-> { where(x_position: 0..7, y_position: 0..7) })
+
   def move!(x, y)
     return false unless move_valid?(x, y)
     capture_happened = update_opponent_if_capture(x, y)

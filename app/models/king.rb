@@ -53,7 +53,7 @@ class King < Piece
   # returns true if king is in check
   def in_check?
     game.pieces.where(is_black: !is_black).each do |piece|
-      return true if piece.valid_move?(x_position, y_position)
+      return true if piece.move_valid?(x_position, y_position)
     end
     false
   end
@@ -62,3 +62,7 @@ class King < Piece
     '&#9818;'
   end
 end
+
+# game.pieces.where(is_black: is_black)
+# if moving that piece opens an unobstructed path to the king for game.pieces.where(is_black: !is_black)
+# then you cannot move that piece because you will be placing your own king in check

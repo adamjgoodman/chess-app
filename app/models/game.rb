@@ -23,8 +23,9 @@ class Game < ApplicationRecord
     pieces.where(is_black: false).update_all(user_id: user_id_white)
   end
 
-  # rubocop:disable MethodLength
   # rubocop:disable Metrics/AbcSize
+  # rubocop:disable MethodLength
+
   def initialize_board
     # Building out white pieces
     (0..7).each do |x|
@@ -83,4 +84,11 @@ class Game < ApplicationRecord
 
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
+
+  def game_in_check?
+    white_king = King.active.where(is_black: false).first
+    black_king = King.active.where(is_black: true).first
+    return true if white_king.in_check? || black_king.in_check?
+    false
+  end
 end
