@@ -2,25 +2,24 @@ class Piece < ApplicationRecord
   belongs_to :game
   has_many :moves
 
-  # rubocop:disable Metrics/AbcSize
   def move!(x, y)
     return false unless move_valid?(x, y)
     capture_happened = update_opponent_if_capture(x, y)
-    en_passant_happened = update_opponent_if_white_capture_en_passant_right(x, y) || # must do this before x_position is updated
-                          update_opponent_if_white_capture_en_passant_left(x, y) || # change to single en passant method?
-                          update_opponent_if_black_capture_en_passant_right(x, y) ||
-                          update_opponent_if_black_capture_en_passant_left(x, y)
-    update_attributes(x_position: x, y_position: y)
-    Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
+    en_passant_happened = update_opponent_if_en_passant_capture(x, y)
+    update_position(x, y)
     update_move_if_promoting_pawn(y)
     update_attributes(type: 'Queen') if promoting_pawn?(y)
     update_move_if_castling(x, y)
     update_rook_if_castling(x, y)
-    update_move_if_capture(x, y) if capture_happened # change to single update_move method?
+    update_move_if_capture(x, y) if capture_happened
     update_move_if_capture_en_passant(x, y) if en_passant_happened
     # update_move_if_game_in_check
   end
-  # rubocop:enable Metrics/AbcSize
+
+  def update_position(x, y)
+    update_attributes(x_position: x, y_position: y)
+    Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
+  end
 
   def capture?(x, y)
     opponent_piece_at?(x, y)
@@ -30,8 +29,16 @@ class Piece < ApplicationRecord
     piece_at(x, y).update_attributes(x_position: 8, y_position: 8, status: 'captured') if capture?(x, y)
   end
 
+  def update_opponent_if_en_passant_capture(x, y)
+    update_opponent_if_white_capture_en_passant_right(x, y) || # must do this before x_position is updated
+      update_opponent_if_white_capture_en_passant_left(x, y) || # change to single en passant method?
+      update_opponent_if_black_capture_en_passant_right(x, y) ||
+      update_opponent_if_black_capture_en_passant_left(x, y)
+  end
+
   def update_opponent_if_white_capture_en_passant_right(x, y)
-    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1)) # will exit early if not true - the rest won't run
+    # will exit early if not true - the rest won't run
+    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1))
     pawn_at(x, (y - 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
   end
 
