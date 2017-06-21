@@ -1,7 +1,5 @@
 FactoryGirl.define do
-
   factory :move do
-     status 'available'
+    status 'available'
   end
-
 end

@@ -4,7 +4,7 @@ class Move < ApplicationRecord
 
   # If even, black is up.  If odd, white.
   def turn
-    return game.user_id_black if (game.moves.count).even?
-     game.user_id_white
+    return game.user_id_white if game.moves.count.even?
+    game.user_id_black
   end
 end
