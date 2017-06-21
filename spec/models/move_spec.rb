@@ -43,6 +43,19 @@ RSpec.describe Move, type: :model do
     expect(white_rook.y_position).to eq 0
   end
 
+  it 'should NOT update the location of the WRONG rook if a player castles' do
+    game = Game.create(active: true)
+    white_king = King.create(is_black: false, x_position: 4, y_position: 0, game_id: game.id)
+    Rook.create(is_black: false, x_position: 7, y_position: 0, game_id: game.id)
+    white_rook_queenside = Rook.create(is_black: false, x_position: 0, y_position: 0, game_id: game.id)
+    white_king.move!(6, 0)
+    white_rook_queenside.reload
+
+    expect(game.moves.last.action).to eq 'castles kingside'
+    expect(white_rook_queenside.x_position).to eq 0
+    expect(white_rook_queenside.y_position).to eq 0
+  end
+
   it 'should update the attributes of a moved piece' do
     game = Game.create(active: true)
     white_knight = Knight.create(is_black: false, x_position: 6, y_position: 0, game_id: game.id)

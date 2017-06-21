@@ -5,7 +5,6 @@ class Piece < ApplicationRecord
   # rubocop:disable Metrics/AbcSize
   def move!(x, y)
     return false unless move_valid?(x, y)
-    update_rook_if_castling(x, y)
     capture_happened = update_opponent_if_capture(x, y)
       en_passant_happened = update_opponent_if_white_capture_en_passant_right(x, y) ||      # must do this before x_position is updated
        update_opponent_if_white_capture_en_passant_left(x, y)   ||      #change to single en passant method?
@@ -13,10 +12,11 @@ class Piece < ApplicationRecord
        update_opponent_if_black_capture_en_passant_left(x, y)
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
-    update_attributes(type: 'Queen') if promoting_pawn?(y)
-      update_move_if_castling(x, y)
-      update_move_if_capture(x, y) if capture_happened        # change to single update_move method?
       update_move_if_promoting_pawn(y)
+      update_attributes(type: 'Queen') if promoting_pawn?(y)
+      update_move_if_castling(x, y)
+      update_rook_if_castling(x, y)
+      update_move_if_capture(x, y) if capture_happened        # change to single update_move method?
       update_move_if_capture_en_passant(x, y) if en_passant_happened
       # update_move_if_game_in_check
   end
