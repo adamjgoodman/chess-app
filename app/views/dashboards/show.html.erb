@@ -3,17 +3,71 @@
 <div class="booyah-box col-10 offset-1">
     <div class="row">
         <div class="col-4">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <%= image_tag '1487990647_Supersushi.png' %>
         </div>
-        <br />
-  <h1>My Dashboard</h1><%= @user.email %>
-  </div>
-  <br />
-  <br />
-  <h2 class='text-center'>Games I'm Currently Playing</h2>
-    <br /><%= @user.name %>
+        <div class="col-6"
+            <br />
+            <br />
+            <h1 class='text-center'>My Dashboard</h1>
 
-  <br />
-  <h2 class='text-center'>Games I've completed</h2>
+            <h2 class='text-center'>Username: <%= current_user.name %></h2>
+            <h4 class='text-center'>Member Since: <%= current_user.created_at.strftime("%B %d, %Y") %> </h4>
+        </div>
+    </div>
+    <hr />
+    <div class="col-8 offset-2">
+        <br />
+        <h3 class='text-center'>Games I'm Currently Playing</h3>
+        <br />
+          <div class="container">
+            <div class="panel panel-default">
+              <div class="panel-heading"></div>
+                  <table class="table">
+                    <tr class="heading">
+                      <th>#</th>
+                      <th>Playing White</th>
+                      <th>Playing Black</th>
+                    </tr>
+                    <% if @active_games %>
+                        <% @active_games.each do |game| %>
+                          <tr>
+                            <td><%= game.id %></td>
+                            <td><%= game.user_id_white.name %></td>
+                            <td><%= game.user_id_black.name %></td>
+                            <td><%= button_to 'View Game', game_path(game.id), class: 'btn btn-primary btn-small float right' %></td>
+                          </tr>
+                        <% end %>
+                    <% end %>
+                  </table>
+              </div>
+            </div>
+        <br />
+        <br />
+          <h3 class='text-center'>Games I've completed</h3>
+          <br />
+                <div class="container">
+            <div class="panel panel-default">
+              <div class="panel-heading"></div>
+                  <table class="table">
+                    <tr class="heading">
+                      <th>#</th>
+                      <th>Playing White</th>
+                      <th>Playing Black</th>
+                      <th>Outcome</th>
+                    </tr>
+                    <% if @completed_games %>
+                        <% @completed_games.each do |game| %>
+                          <tr>
+                            <td><%= game.id %></td>
+                            <td><%= game.user_id_white.name %></td>
+                            <td><%= game.user_id_black.name %></td>
+                            <td><%= game.winner %></td>
+                          </tr>
+                        <% end %>
+                    <% end %>
+                  </table>
+              </div>
+            </div>
+    </div>
 </div>

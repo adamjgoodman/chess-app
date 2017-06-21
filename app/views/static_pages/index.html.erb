@@ -14,7 +14,7 @@
   <br />
   <br />
   <div class="col-6 offset-3">
-    
+
   <% if user_signed_in? %>
     <!-- Button trigger "Offer A Game" modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#offerGameModal">
@@ -31,41 +31,41 @@
   <h2><b>Available Games</b></h2>
   <br />
 
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading"></div>
-    <table class="table">
-      <tr class="heading">
-        <th>#</th>
-        <th>Game Offered By...</th>
-        <th>You would be...</th>
-      </tr>
-      <% @available_games.each do |available_game| %>
-        <tr>
-          <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.name %></td>
-          <td><%= available_game.missing_player_color %></td>
-     
-          <td>      <%= simple_form_for available_game do |f| %>
-          <% if user_signed_in? %>
-            <%= f.hidden_field available_game.missing_player_color == 'White' ? 
-              :user_id_white : :user_id_black, value: current_user.id %> 
-
-            <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
-          <% else %>
-            <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
-          <% end% %>
-          <br />
-          <% end %>
-         </td>
+  <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading"></div>
+      <table class="table">
+        <tr class="heading">
+          <th>#</th>
+          <th>Game Offered By...</th>
+          <th>You would be...</th>
         </tr>
-      <% end %>
-    </table>
+        <% @available_games.each do |available_game| %>
+          <tr>
+            <td><%= available_game.id %></td>
+            <td><%= available_game.host_player.name %></td>
+            <td><%= available_game.missing_player_color %></td>
+
+            <td>      <%= simple_form_for available_game do |f| %>
+            <% if user_signed_in? %>
+              <%= f.hidden_field available_game.missing_player_color == 'White' ?
+                :user_id_white : :user_id_black, value: current_user.id %>
+
+              <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
+            <% else %>
+              <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
+            <% end% %>
+            <br />
+            <% end %>
+           </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
-  <br />
-  <br />
-  <br />
+    <br />
+    <br />
+    <br />
 </div>
 
 
@@ -88,7 +88,7 @@
         </p>
         <p><b>ONCE YOU'RE LOGGED IN:</b></p>
         <p>
-        1. <b> Offer a game or accept someone’s invitation  to play.</b> 
+        1. <b> Offer a game or accept someone’s invitation  to play.</b>
         </p>
         <p>
         2. <b> A game board opens.</b> As soon as two people have agreed to play, the game board will show both people’s usernames, who is online, and whose move it is. You need to be online to make a move, but you don’t have to be online at the same time.  
@@ -98,7 +98,7 @@
         </p>
         <br />
         <p><b>Your dashboard:</b></p>
-        <p> 1.  You can play more than one game at a time.  </p>
+        <p> 1.  You can play more than one game at a time. </p>
         <p>  2.  If you are only playing one game, when you log in you will go immediately to that game board.   </p>
         <p> 3.  If you’re playing more than one game, when you log in you will go to your dashboard. Your dashboard shows all the games you are currently playing, as well as listing all the games you have played. From there you can choose which game board you want to see.</p>
         <br />
@@ -129,10 +129,10 @@
           <p> As soon as you click one of the “Offer Game” buttons you’ll be taken to a game board that shows you as whichever color you chose.</p>
           <h3> What will happen next?</h3>
           <p>1. The new game you have created will be added to the list of games on the welcome page that other players can join.</p>
-          <p>2. As soon as someone clicks “Join” to join your game, that person’s username will appear on your game board playing the other color and the board will indicate “White’s Move.”</p> 
+          <p>2. As soon as someone clicks “Join” to join your game, that person’s username will appear on your game board playing the other color and the board will indicate “White’s Move.”</p>
           <p>3. As soon as White makes the first move the board will change again to indicate “Black’s Move.”</p>
           <p>You can check your Dashboard any time to see the status of the games you are currently playing and the outcomes of the games you have played. Enjoy your games!</p>
-      
+
         </div>
         <div class="modal-footer">
           <div class='float-left'>
@@ -151,4 +151,4 @@
     </div>
   </div>
 <% end %>
-  
+
