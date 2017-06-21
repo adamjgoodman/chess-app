@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Overpass:300,400,900" rel="stylesheet">
   </head>
 
   <body>
@@ -27,7 +28,7 @@
             <ul class="navbar-nav">
               <% if user_signed_in? %>
                 <li class="nav-item">
-                    <%= link_to 'My Dashboard', dashboard_path, class:'nav-link' %> 
+                    <%= link_to 'My Dashboard', dashboard_path, class:'nav-link' %>
                 </li>
                 <li class="nav-item">
                     <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class:'nav-link' %>
