@@ -31,6 +31,7 @@ RSpec.describe Game, type: :model do
     King.active.create(is_black: true, x_position: 3, y_position: 3, game_id: game.id)
     Bishop.active.create(is_black: true, x_position: 1, y_position: 7, game_id: game.id)
     expect(game.game_in_check?).to eq false
+  end
 
   it 'should detect stalemate' do
     game = Game.create
