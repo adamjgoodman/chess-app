@@ -5,7 +5,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
 
-  has_many :games
+  def games
+    Game.where(user_id_white: id).or(Game.where(user_id_black: id))
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

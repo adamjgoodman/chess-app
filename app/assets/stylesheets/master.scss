@@ -76,7 +76,7 @@ th {
   text-align: center;
   font-size: 40px;
   color: white;
-  text-shadow: 0px 0px 1px black; 
+  text-shadow: 0px 0px 1px black;
 }
 
 .piece {
@@ -84,8 +84,18 @@ th {
   font-size: 40px;
 }
 
+.button {
+  padding:5px;
+  background-color: blue;
+  border: 1px solid #666;
+  color: white;
+  text-decoration:none;
+  hover-color: none;
+}
+
 #myModal {
   text-align: center;
 }
+
 
 

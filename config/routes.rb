@@ -10,5 +10,6 @@ Rails.application.routes.draw do
   end
 
   resources :pieces, only: [:update]
+  resources :dashboards, only: :show
 
 end
