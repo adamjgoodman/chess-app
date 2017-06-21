@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Move, type: :model do
-  it 'should promote a Pawn to Queen and update move to show action == promotes pawn when the pawn moves to the last row' do
+  it 'should promote a Pawn to Queen and update move action when the pawn is promoted' do
     game = Game.create(active: true)
     white_pawn = Pawn.create(is_black: false, x_position: 4, y_position: 6, game_id: game.id)
     black_pawn = Pawn.create(is_black: true, x_position: 3, y_position: 1, game_id: game.id)
@@ -92,13 +92,12 @@ RSpec.describe Move, type: :model do
     expect(black_pawn.status).to eq 'captured'
   end
 
-    it 'should update attributes of move to show action == captures en passant if white_capture_en_passant' do
+  it 'should update attributes of move to show action == captures en passant if white_capture_en_passant' do
     game = Game.create(status: 'active')
     white_pawn = Pawn.create(is_black: false, x_position: 4, y_position: 4, game_id: game.id)
     black_pawn = Pawn.create(is_black: true, x_position: 5, y_position: 6, game_id: game.id)
     black_pawn.move!(5, 4)
     white_pawn.move!(5, 5)
-
 
     # white pawn captures en passant to right
     expect(game.moves.last.action).to eq 'captures en passant'

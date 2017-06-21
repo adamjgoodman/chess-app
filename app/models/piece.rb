@@ -6,19 +6,19 @@ class Piece < ApplicationRecord
   def move!(x, y)
     return false unless move_valid?(x, y)
     capture_happened = update_opponent_if_capture(x, y)
-      en_passant_happened = update_opponent_if_white_capture_en_passant_right(x, y) ||      # must do this before x_position is updated
-       update_opponent_if_white_capture_en_passant_left(x, y)   ||      #change to single en passant method?
-       update_opponent_if_black_capture_en_passant_right(x, y)   ||
-       update_opponent_if_black_capture_en_passant_left(x, y)
+    en_passant_happened = update_opponent_if_white_capture_en_passant_right(x, y) || # must do this before x_position is updated
+                          update_opponent_if_white_capture_en_passant_left(x, y) || # change to single en passant method?
+                          update_opponent_if_black_capture_en_passant_right(x, y) ||
+                          update_opponent_if_black_capture_en_passant_left(x, y)
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
-      update_move_if_promoting_pawn(y)
-      update_attributes(type: 'Queen') if promoting_pawn?(y)
-      update_move_if_castling(x, y)
-      update_rook_if_castling(x, y)
-      update_move_if_capture(x, y) if capture_happened        # change to single update_move method?
-      update_move_if_capture_en_passant(x, y) if en_passant_happened
-      # update_move_if_game_in_check
+    update_move_if_promoting_pawn(y)
+    update_attributes(type: 'Queen') if promoting_pawn?(y)
+    update_move_if_castling(x, y)
+    update_rook_if_castling(x, y)
+    update_move_if_capture(x, y) if capture_happened # change to single update_move method?
+    update_move_if_capture_en_passant(x, y) if en_passant_happened
+    # update_move_if_game_in_check
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -31,7 +31,7 @@ class Piece < ApplicationRecord
   end
 
   def update_opponent_if_white_capture_en_passant_right(x, y)
-    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1))# will exit early if not true - the rest won't run
+    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1)) # will exit early if not true - the rest won't run
     pawn_at(x, (y - 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
   end
 
@@ -42,12 +42,12 @@ class Piece < ApplicationRecord
 
   def update_opponent_if_black_capture_en_passant_left(x, y)
     return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y + 1))
-        pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+    pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
   end
 
   def update_opponent_if_black_capture_en_passant_right(x, y)
     return unless type == 'Pawn' && x_position == (x + 1) && !space_occupied?(x, y) && pawn_at(x, (y + 1))
-        pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+    pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
   end
 
   def update_move_if_castling(x, y)
@@ -55,7 +55,7 @@ class Piece < ApplicationRecord
     Move.last.update_attributes(action: 'castles queenside') if castling_queenside?(x, y)
   end
 
-  def update_move_if_capture(x, y)
+  def update_move_if_capture(_x, _y)
     Move.last.update_attributes(action: 'captures piece')
   end
 
@@ -63,7 +63,7 @@ class Piece < ApplicationRecord
     Move.last.update_attributes(action: 'promotes pawn') if promoting_pawn?(y)
   end
 
-  def update_move_if_capture_en_passant(x, y)
+  def update_move_if_capture_en_passant(_x, _y)
     Move.last.update_attributes(action: 'captures en passant')
   end
 
@@ -80,11 +80,11 @@ class Piece < ApplicationRecord
     rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?(x, y)
   end
 
-  def castling_kingside?(x, y)
+  def castling_kingside?(_x, _y)
     type == 'King' && x_position == 6 && moves.count == 1
   end
 
-  def castling_queenside?(x, y)
+  def castling_queenside?(_x, _y)
     type == 'King' && x_position == 2 && moves.count == 1
   end
 
