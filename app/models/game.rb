@@ -62,6 +62,26 @@ class Game < ApplicationRecord
     Queen.create(is_black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
   end
 
+  # detects stalemate for color of current piece within game.
+  # Runs through an array of certain color's active pieces and checks to see if there ar any valid moves available
+
+  def stalemate(is_black)
+    active_pieces = pieces_active(is_black)
+
+    active_pieces.each do |piece|
+      (0..7).each do |x|
+        (0..7).each do |y|
+          return false if piece.move_valid?(x, y)
+        end
+      end
+    end
+    true
+  end # returns an array of a color's active pieces
+
+  def pieces_active(is_black)
+    pieces.where('is_black = ? AND status = ?', is_black, 'active')
+  end
+
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
 
