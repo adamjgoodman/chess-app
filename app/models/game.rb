@@ -91,4 +91,10 @@ class Game < ApplicationRecord
     return true if white_king.in_check? || black_king.in_check?
     false
   end
+
+  # If even, white is up. If odd, black.
+  def turn
+    return user_id_white if moves.count.even?
+    user_id_black
+  end
 end

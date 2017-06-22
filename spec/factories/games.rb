@@ -9,4 +9,10 @@ FactoryGirl.define do
   factory :completed_game, class: Game do
     status 'completed'
   end
+
+  factory :active_game, class: Game do
+    active true
+    user_id_black 110
+    user_id_white 111
+  end
 end

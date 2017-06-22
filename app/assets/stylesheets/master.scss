@@ -20,8 +20,20 @@
 }
 
 body {
-    background: image_url('bg.png');
+    background: image_url('brushed_alu.png');
   font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif;
+}
+
+.hero {
+  background: image_url('star-wars-chess.png') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  min-height: 600px;
+  width: 100%;
+  box-shadow: 0px 3px 8px #2a2a2a;
+  padding: 10px;
 }
 
 .booyah-box {
