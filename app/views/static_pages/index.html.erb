@@ -4,28 +4,27 @@
     <h1>Let the Wookie Win</h1>
   <br />
   </div>
-  <br /><br />
 
     <div class="container">
       <div class="row">
-          <div class="col-8 col-offset-2 col-md-8 col-md-offset-2 text-center">
+        <div class="col-8 col-offset-2 col-md-8 col-md-offset-2 text-center">
         <!-- Button trigger how to play modal -->
 <!--         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#howToPlayModal">
           Instructions
         </button> -->
 
-            <% if user_signed_in? %>
+          <% if user_signed_in? %>
           <!-- Button trigger "Offer A Game" modal -->
        <!--    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#offerGameModal">
           Offer Game</button> -->
-              <%= link_to 'Join Game', "#", class: "btn btn-primary btn-lg" %>
-              <%= link_to 'Offer Game', "#", class: "btn btn-primary btn-lg" %>
-              <%= link_to 'Continue Game', "#", class: "btn btn-primary btn-lg" %>
-            <% else %>
-              <%= button_to 'Create Account', new_user_session_path, class: "btn btn-primary btn-lg text-center" %>
-            <% end %>
-          </div>
+            <%= link_to 'Join Game', "#", class: "btn btn-primary btn-lg text-center" %>
+            <%= link_to 'Offer Game', "#", class: "btn btn-primary btn-lg text-center" %>
+            <%= link_to 'Continue Game', "#", class: "btn btn-primary btn-lg text-center" %>
+          <% else %>
+            <%= button_to 'Create Account', new_user_session_path, class: "btn btn-primary btn-lg text-center" %>
+          <% end %>
         </div>
+      </div>
     </div>
 
 
