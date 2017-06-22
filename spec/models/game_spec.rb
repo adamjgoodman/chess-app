@@ -50,6 +50,7 @@ RSpec.describe Game, type: :model do
     Move.create(game_id: game.id, piece_id: king.id)
     Move.create(game_id: game.id, piece_id: king.id)
     expect(game.turn).to eq 111
+  end
 
   it 'should detect stalemate' do
     game = Game.create

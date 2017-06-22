@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Move, type: :model do
-
   it 'should promote a Pawn to Queen and update move action when the pawn is promoted' do
     game = Game.create(active: true)
     white_pawn = Pawn.create(is_black: false, x_position: 4, y_position: 6, game_id: game.id)
