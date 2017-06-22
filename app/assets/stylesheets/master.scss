@@ -4,19 +4,19 @@
 
 .navbar-inverse .navbar-nav .nav-link {
   color: white;
-  font-family: 'kalamregular';
+  font-family: "Segoe UI", Candara, sans-serif;
   opacity: .95;
 }
 
 .navbar-inverse .navbar-brand {
     color: #E3E85A;
-    font-family: 'kalamregular';
+    font-family: "Segoe UI", Candara, sans-serif;
     font-size: 22px;
 }
 
 .navbar {
   box-shadow: 0px 1px 3px #2a2a2a;
-  background: image_url('simple_dashed.png')
+  background: #443e4e;
 }
 
 .hero {
@@ -25,8 +25,8 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  min-height: 600px;
   width: 100%;
+  height: 1000px;
   box-shadow: 0px 3px 8px #2a2a2a;
   padding: 10px;
 }
@@ -126,6 +126,7 @@ th {
 
 .btn {
   border-radius: 0;
+  margin: 5px;
 }
 
 .btn-primary {
@@ -133,7 +134,8 @@ th {
   border-color: #443e4e;
   border: 5px solid;
   color: #443e4e;
+  font-family:'Overpass', sans-serif;
   font-weight: bold;
   font-size: 20px;
-  margin: 10px;
+  padding-top: 17px;
 }
