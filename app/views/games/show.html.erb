@@ -19,7 +19,7 @@
 <br />
 <br />
 <h2 class= 'text-center'>Moves</h3>
-    <table class="table">
+    <table class="table text-center">
         <tr>
           <th>Move Number</th>
           <th>White's Move</th>
@@ -29,8 +29,12 @@
           <% @moves.each_slice(2).each_with_index do |pair, index| %>
               <tr>
                   <td><%= index + 1 %></td>
-                  <td><%= pair.first.to_algebra %></td>
-                  <td><%= pair.last.to_algebra %> </td>
+                  <% if pair[0] %>
+                    <td><%= pair[0].to_algebra.html_safe %></td>
+                  <% end %>
+                  <% if pair[1] %>
+                    <td><%= pair[1].to_algebra.html_safe %> </td>
+                  <% end %>
               </tr>
           <% end %>
         <% end %>

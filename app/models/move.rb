@@ -3,52 +3,40 @@ class Move < ApplicationRecord
   belongs_to :piece
 
   def algebra_x
-        if destination_x == 0
-            return a
-        elsif destination_x == 1
-            return b
-        elsif destination_x == 2
-            return c
-        elsif destination_x == 3
-            return d
-        elsif destination_x == 4
-            return e
-        elsif destination_x == 5
-            return f
-        elsif destination_x == 6
-            return g
-        else
-            h
-      end
+    %w[a b c d e f g h][destination_x]
+  end
 
   def algebra_y
-    return destination_y + 1
+    destination_y + 1
   end
 
   def destination
-    algebra_x algebra_y
+    "#{algebra_x} #{algebra_y}"
   end
 
-    def to_algebra
-    if action == 'castles kingside'
-        return 'O-O'
+  # rubocop:disable MethodLength
+  # rubocop: disable CyclomaticComplexity
+  def to_algebra
+    case action
+    when 'castles kingside'
+      'O-O'
 
-    elsif action == 'castles queenside'
-        return 'O-O-O'
+    when 'castles queenside'
+      'O-O-O'
 
-    elsif action = 'captures piece'
-        return 'destination &#x2020;'
+    when 'captures piece'
+      "#{destination} &#x2020;"
 
-    elsif action == 'promotes pawn'
-        return 'destination promotes'
+    when 'promotes pawn'
+      "#{destination} promotes"
 
-    elsif action == 'captures en passant'
-        return 'destination ep&#x2020;'
-
-    elsif check == true
-        return 'destination check'
+    when 'captures en passant'
+      "#{destination} ep&#x2020;"
 
     else
-            destination
+      check ? "#{destination} check" : destination
     end
+  end
+  # rubocop: enable CyclomaticComplexity
+  # rubocop:enable MethodLength
 end

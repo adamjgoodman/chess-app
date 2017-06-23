@@ -30,7 +30,7 @@
     <!-- Button trigger "Offer A Game" modal -->
       <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#offerGameModal">
       Offer A Game</button>
-      <% else %>
+  <% else %>
       <%= button_to 'Offer A Game', new_user_session_path, class: "btn btn-primary btn-lg" %>
   <% end %>
   </div>
@@ -45,40 +45,11 @@
 <div class="container">
   <div class="panel panel-default">
     <div class="panel-heading"></div>
-    <table class="table">
-      <tr class="heading">
-        <th>#</th>
-        <th>Game Offered By...</th>
-        <th>You would be...</th>
-      </tr>
-      <% @available_games.each do |available_game| %>
-        <tr>
-          <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.name %></td>
-          <td><%= available_game.missing_player_color %></td>
-
-          <td>      <%= simple_form_for available_game do |f| %>
-          <% if user_signed_in? %>
-            <%= f.hidden_field available_game.missing_player_color == 'White' ?
-              :user_id_white : :user_id_black, value: current_user.id %>
-
-            <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
-          <% else %>
-            <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
-          <% end% %>
-          <br />
-          <% end %>
-         </td>
-
-  <div class="container">
-    <div class="panel panel-default">
-      <div class="panel-heading"></div>
       <table class="table">
         <tr class="heading">
           <th>#</th>
           <th>Game Offered By...</th>
           <th>You would be...</th>
-
         </tr>
         <% @available_games.each do |available_game| %>
           <tr>
@@ -86,18 +57,17 @@
             <td><%= available_game.host_player.name %></td>
             <td><%= available_game.missing_player_color %></td>
 
-            <td>      <%= simple_form_for available_game do |f| %>
-            <% if user_signed_in? %>
-              <%= f.hidden_field available_game.missing_player_color == 'White' ?
-                :user_id_white : :user_id_black, value: current_user.id %>
+            <td><%= simple_form_for available_game do |f| %>
+              <% if user_signed_in? %>
+                <%= f.hidden_field available_game.missing_player_color == 'White' ?
+                  :user_id_white : :user_id_black, value: current_user.id %>
 
-              <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
-            <% else %>
-              <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
-            <% end% %>
-            <br />
-            <% end %>
-           </td>
+                <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
+              <% else %>
+                <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
+              <% end% %>
+              <br />
+            <% end %></td>
           </tr>
         <% end %>
       </table>
@@ -139,13 +109,10 @@
         <br />
         <p><b>Your dashboard:</b></p>
         <p> 1.  You can play more than one game at a time. </p>
-
-        <p>  2.  If you are only playing one game, when you log in you will go immediately to that game board.   </p>
-        <p> 3.  If you’re playing more than one game, when you log in you will go to your dashboard. Your dashboard shows all the games you are currently playing, as well as listing all the games you have played. From there you can choose which game board you want to see.</p>
         <p>  2.  To find your way around, any time you are logged in just click the link at the top of the page to go to your your dashboard. From there you can choose which game board you want to see. (Your dashboard shows all the games you are currently playing, as well as listing all the games you have played.)</p>
         <br />
         <p><b>What does it cost to play?</b></p>
-        <p> Nothing! “Let The Wookie Win” is a free service offered by Issei, Kalen, Jorge, Michelle, Jacob, and Tyna and was created as part of our work at <a href="https://www.thefirehoseproject.com/">The Firehose Project</a>.</p>
+        <p> Nothing! “Let The Wookie Win” is a free service offered by <a href="https://github.com/ihorie">Issei</a>, <a href="https://github.com/DrKalen">Kalen</a>, <a href="https://github.com/Jorge-FHP">Jorge</a>, <a href="https://github.com/punkleia">Michelle</a>, <a href="https://github.com/jacobwgillespie">Jacob</a>, and <a href="https://github.com/tynahuynh">Tyna</a> and was created as part of our work at <a href="https://www.thefirehoseproject.com/">The Firehose Project</a>.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
