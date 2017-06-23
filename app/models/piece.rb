@@ -2,12 +2,82 @@ class Piece < ApplicationRecord
   belongs_to :game
   has_many :moves
 
+  scope :active, (-> { where(x_position: 0..7, y_position: 0..7) })
+
   def move!(x, y)
     return false unless move_valid?(x, y)
+    capture_happened = update_opponent_if_capture(x, y)
+    en_passant_happened = update_opponent_if_en_passant_capture(x, y)
+    update_position(x, y)
+    update_move_if_promoting_pawn(y)
+    update_attributes(type: 'Queen') if promoting_pawn?(y)
+    update_move_if_castling(x, y)
     update_rook_if_castling(x, y)
+    update_move_if_capture(x, y) if capture_happened
+    update_move_if_capture_en_passant(x, y) if en_passant_happened
+    # update_move_if_game_in_check
+  end
+
+  def update_position(x, y)
     update_attributes(x_position: x, y_position: y)
     Move.create(piece_id: id, game_id: game_id, destination_x: x_position, destination_y: y_position)
-    update_attributes(type: 'Queen') if promoting_pawn?(y)
+  end
+
+  def capture?(x, y)
+    opponent_piece_at?(x, y)
+  end
+
+  def update_opponent_if_capture(x, y)
+    piece_at(x, y).update_attributes(x_position: 8, y_position: 8, status: 'captured') if capture?(x, y)
+  end
+
+  def update_opponent_if_en_passant_capture(x, y)
+    update_opponent_if_white_capture_en_passant_right(x, y) || # must do this before x_position is updated
+      update_opponent_if_white_capture_en_passant_left(x, y) || # change to single en passant method?
+      update_opponent_if_black_capture_en_passant_right(x, y) ||
+      update_opponent_if_black_capture_en_passant_left(x, y)
+  end
+
+  def update_opponent_if_white_capture_en_passant_right(x, y)
+    # will exit early if not true - the rest won't run
+    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1))
+    pawn_at(x, (y - 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+  end
+
+  def update_opponent_if_white_capture_en_passant_left(x, y)
+    return unless type == 'Pawn' && x_position == (x + 1) && !space_occupied?(x, y) && pawn_at(x, (y - 1))
+    pawn_at(x, (y - 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+  end
+
+  def update_opponent_if_black_capture_en_passant_left(x, y)
+    return unless type == 'Pawn' && x_position == (x - 1) && !space_occupied?(x, y) && pawn_at(x, (y + 1))
+    pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+  end
+
+  def update_opponent_if_black_capture_en_passant_right(x, y)
+    return unless type == 'Pawn' && x_position == (x + 1) && !space_occupied?(x, y) && pawn_at(x, (y + 1))
+    pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
+  end
+
+  def update_move_if_castling(x, y)
+    Move.last.update_attributes(action: 'castles kingside') if castling_kingside?(x, y)
+    Move.last.update_attributes(action: 'castles queenside') if castling_queenside?(x, y)
+  end
+
+  def update_move_if_capture(_x, _y)
+    Move.last.update_attributes(action: 'captures piece')
+  end
+
+  def update_move_if_promoting_pawn(y)
+    Move.last.update_attributes(action: 'promotes pawn') if promoting_pawn?(y)
+  end
+
+  def update_move_if_capture_en_passant(_x, _y)
+    Move.last.update_attributes(action: 'captures en passant')
+  end
+
+  def update_move_if_game_is_in_check
+    Move.last.update_attributes(check: true) if game_in_check?
   end
 
   def promoting_pawn?(y)
@@ -19,12 +89,12 @@ class Piece < ApplicationRecord
     rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?(x, y)
   end
 
-  def castling_kingside?(x, y)
-    x_position - x == -2 && y_position == y
+  def castling_kingside?(_x, _y)
+    type == 'King' && x_position == 6 && moves.count == 1
   end
 
-  def castling_queenside?(x, y)
-    x_position - x == 2 && y_position == y
+  def castling_queenside?(_x, _y)
+    type == 'King' && x_position == 2 && moves.count == 1
   end
 
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece
@@ -116,5 +186,10 @@ class Piece < ApplicationRecord
   def friendly_piece_at?(x, y)
     piece = piece_at(x, y)
     piece && piece.is_black == is_black
+  end
+
+  def opponent_piece_at?(x, y)
+    piece = piece_at(x, y)
+    piece && piece.is_black == !is_black
   end
 end

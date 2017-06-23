@@ -21,19 +21,24 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+
     @moves = @game.moves
+
+    # if @game.stalemate(current_user.id == @game.user_id_black)
+    #   @game.update_attributes(status: 'Stalemate')
+    # end
   end
 
   def forfeit_game
     @game = Game.find(params[:id])
 
     if @game.user_id_black == current_user.id
-      @game.update_attributes(status: 'complete', winner: @game.user_id_white)
+      @game.update_attributes(status: 'Forfeit', winner: @game.user_id_white)
     else
-      @game.update_attributes(status: 'complete', winner: @game.user_id_black)
+      @game.update_attributes(status: 'Forfeit', winner: @game.user_id_black)
     end
 
-    redirect_to root_path
+    redirect_to game_path(@game.id)
   end
 
   private
