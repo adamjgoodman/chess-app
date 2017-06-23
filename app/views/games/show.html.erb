@@ -17,9 +17,11 @@
   <% end %>
 </table>
 <br />
-<br />
-<h2 class= 'text-center'>Moves</h3>
+
+<%= link_to 'Forefeit Game', forfeit_game_game_path, method: :post, data: {confirm: 'Are you sure you want to forfeit?'},class: 'btn btn-secondary' %>
+
     <table class="table text-center">
+      <h2 class= 'text-center'>&nbsp;&nbsp; Moves</h3>
         <tr>
           <th>Move Number</th>
           <th>White's Move</th>
@@ -68,12 +70,6 @@
     });
   });
 </script>
-
-
-<%= link_to 'Forefeit Game', forfeit_game_game_path, method: :post, data: {confirm: 'Are you sure you want to forfeit?'},class: 'btn btn-secondary' %>
-
-
-
 
 <script>
 $(document).ready(function () {
