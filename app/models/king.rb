@@ -1,8 +1,15 @@
 class King < Piece
   def move_valid?(x, y)
-    return false if space_occupied?(x, y) == true && opponent_color(x, y) == is_black
+    return false if friendly_piece_at?(x, y)
     return false if legal_move?(x, y) == false
-    return false if in_check? == true
+
+    prev_x = x_position
+    prev_y = y_position
+    update_attributes(x_position: x, y_position: y)
+    check = in_check?
+    update_attributes(x_position: prev_x, y_position: prev_y)
+
+    return false if check == true
     true
   end
 

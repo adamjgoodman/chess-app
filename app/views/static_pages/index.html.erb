@@ -41,35 +41,7 @@
   <br />
   <h2><b>Available Games</b></h2>
   <br />
-
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading"></div>
-    <table class="table">
-      <tr class="heading">
-        <th>#</th>
-        <th>Game Offered By...</th>
-        <th>You would be...</th>
-      </tr>
-      <% @available_games.each do |available_game| %>
-        <tr>
-          <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.name %></td>
-          <td><%= available_game.missing_player_color %></td>
-
-          <td>      <%= simple_form_for available_game do |f| %>
-          <% if user_signed_in? %>
-            <%= f.hidden_field available_game.missing_player_color == 'White' ?
-              :user_id_white : :user_id_black, value: current_user.id %>
-
-            <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
-          <% else %>
-            <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
-          <% end% %>
-          <br />
-          <% end %>
-         </td>
-
+  
   <div class="container">
     <div class="panel panel-default">
       <div class="panel-heading"></div>
@@ -193,4 +165,3 @@
     </div>
   </div>
 <% end %>
-

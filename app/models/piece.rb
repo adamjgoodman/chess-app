@@ -129,7 +129,7 @@ class Piece < ApplicationRecord
   def vertical_obstructed?(x, y)
     y_min = [y_position, y].min
     y_max = [y_position, y].max
-    (y_min + 1...y_max).each do |y_coord|
+    (y_min + 1...y_max-1).each do |y_coord|
       return true if space_occupied?(x, y_coord)
     end
     false
@@ -139,7 +139,7 @@ class Piece < ApplicationRecord
   def horizontal_obstructed?(x, y)
     x_min = [x_position, x].min
     x_max = [x_position, x].max
-    (x_min + 1...x_max).each do |x_coord|
+    (x_min + 1...x_max-1).each do |x_coord|
       return true if space_occupied?(x_coord, y)
     end
     false

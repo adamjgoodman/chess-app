@@ -62,9 +62,20 @@ class Game < ApplicationRecord
     Queen.create(is_black: true, x_position: 3, y_position: 7, game_id: id, user_id: user_id_black, status: 'active')
   end
 
-  # detects stalemate for color of current piece within game.
-  # Runs through an array of certain color's active pieces and checks to see if there ar any valid moves available
 
+
+    def checkmate?(is_black)
+    king = pieces.find_by(type: 'King', is_black: is_black)
+
+    return false unless king.in_check?
+
+    return false unless stalemate(is_black)
+
+    true
+  end
+
+    # detects stalemate for color of current piece within game.
+  # Runs through an array of certain color's active pieces and checks to see if there ar any valid moves available
   def stalemate(is_black)
     active_pieces = pieces_active(is_black)
 
@@ -75,7 +86,7 @@ class Game < ApplicationRecord
         end
       end
     end
-    true
+    return true
   end # returns an array of a color's active pieces
 
   def pieces_active(is_black)
@@ -86,9 +97,15 @@ class Game < ApplicationRecord
   # rubocop:enable MethodLength
 
   def game_in_check?
-    white_king = King.active.where(is_black: false).first
-    black_king = King.active.where(is_black: true).first
+    white_king = pieces.where('is_black = ? AND type = ?', false, 'King').first
+    black_king = pieces.where('is_black = ? AND type = ?', true, 'King').first
+    # king = pieces.where(type: 'King').first
+
+    # white_king = pieces.where('is_black = ? AND type = ?', true, 'king')
+    # white_king = King.active.where(is_black: false).first
+    # black_king = King.active.where(is_black: true).first
     return true if white_king.in_check? || black_king.in_check?
+    # return true if king.in_check?
     false
   end
 
