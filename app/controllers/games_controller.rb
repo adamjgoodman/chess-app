@@ -22,6 +22,8 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
 
+    @moves = @game.moves
+
     # if @game.stalemate(current_user.id == @game.user_id_black)
     #   @game.update_attributes(status: 'Stalemate')
     # end

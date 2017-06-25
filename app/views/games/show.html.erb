@@ -16,6 +16,31 @@
     <% end %>
   <% end %>
 </table>
+<br />
+
+<%= link_to 'Forefeit Game', forfeit_game_game_path, method: :post, data: {confirm: 'Are you sure you want to forfeit?'},class: 'btn btn-secondary' %>
+
+    <table class="table text-center">
+      <h2 class= 'text-center'>&nbsp;&nbsp; Moves</h3>
+        <tr>
+          <th>Move Number</th>
+          <th>White's Move</th>
+          <th>Black's Move</th>
+        </tr>
+        <% if @moves %>
+          <% @moves.each_slice(2).each_with_index do |pair, index| %>
+              <tr>
+                  <td><%= index + 1 %></td>
+                  <% if pair[0] %>
+                    <td><%= pair[0].to_algebra.html_safe %></td>
+                  <% end %>
+                  <% if pair[1] %>
+                    <td><%= pair[1].to_algebra.html_safe %> </td>
+                  <% end %>
+              </tr>
+          <% end %>
+        <% end %>
+    </table>
 
 
 <script>
@@ -24,14 +49,14 @@
       helper: "clone",
     });
     $(".droppable").droppable({
-      
+
       drop: function( event, ui) {
-        
+
         var id = ui.draggable.data('id')
         var x = $(this).data('x')
         var y = $(this).data('y')
-      
-        
+
+
         $.ajax({
           type: 'PUT',
            url: '/pieces/' + id,
@@ -45,12 +70,6 @@
     });
   });
 </script>
-
-
-<%= link_to 'Forefeit Game', forfeit_game_game_path, method: :post, data: {confirm: 'Are you sure you want to forfeit?'},class: 'btn btn-secondary' %>
-
-
-
 
 <script>
 $(document).ready(function () {
