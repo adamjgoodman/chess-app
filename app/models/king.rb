@@ -2,14 +2,6 @@ class King < Piece
   def move_valid?(x, y)
     return false if friendly_piece_at?(x, y)
     return false if legal_move?(x, y) == false
-
-    prev_x = x_position
-    prev_y = y_position
-    update_attributes(x_position: x, y_position: y)
-    check = in_check?
-    update_attributes(x_position: prev_x, y_position: prev_y)
-
-    return false if check == true
     true
   end
 

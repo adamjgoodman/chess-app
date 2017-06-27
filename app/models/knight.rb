@@ -1,6 +1,6 @@
 class Knight < Piece
   def move_valid?(x, y)
-    return false if space_occupied?(x, y)
+    return false if friendly_piece_at?(x, y)
     return true if upper_right_diagonal_legal?(x, y)
     return true if lower_right_diagonal_legal?(x, y)
     return true if upper_left_diagonal_legal?(x, y)
