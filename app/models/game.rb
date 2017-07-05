@@ -80,9 +80,9 @@ class Game < ApplicationRecord
     active_pieces.each do |piece|
       (0..7).each do |x|
         (0..7).each do |y|
-          if piece.move_valid?(x, y)
-            return false unless piece.move_causes_check?(x, y)
-          end
+          return false if (piece.move_valid?(x,y) && piece.move_causes_check?(x,y) == false)
+          true
+          
         end
       end
     end
@@ -100,9 +100,11 @@ class Game < ApplicationRecord
     return true if white_king.in_check? || black_king.in_check?
     # return true if king.in_check?
     false
+
   end
 
-  # If even, white is up. If odd, black.
+
+
   def turn
     return user_id_white if moves.count.even?
     user_id_black
