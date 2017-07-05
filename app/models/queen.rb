@@ -1,5 +1,4 @@
 class Queen < Piece
-  
   def move_valid?(x, y)
     return false unless vertical_move?(x, y) || horizontal_move?(x, y) || diagonal_move?(x, y)
     return false if path_obstructed?(x, y)

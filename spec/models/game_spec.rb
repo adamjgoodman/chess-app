@@ -71,7 +71,7 @@ RSpec.describe Game, type: :model do
     king = King.create(is_black: true, x_position: 3, y_position: 4, game_id: game.id, status: 'active')
     Queen.create(is_black: false, x_position: 3, y_position: 5, game_id: game.id, status: 'active')
     king2 = King.create(is_black: false, x_position: 1, y_position: 1, game_id: game.id, status: 'active')
-    queen = Queen.create(is_black: true, x_position: 6, y_position: 3, game_id: game.id, status: 'active')
+    Queen.create(is_black: true, x_position: 6, y_position: 3, game_id: game.id, status: 'active')
 
     expect(game.checkmate?(king.is_black)).to eq true
     expect(game.checkmate?(king2.is_black)).to eq false

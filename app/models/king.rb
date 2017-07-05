@@ -1,6 +1,6 @@
 class King < Piece
   def move_valid?(x, y)
-    return false unless in_bounds(x,y)
+    return false unless in_bounds(x, y)
     return false if friendly_piece_at?(x, y)
     return false if legal_move?(x, y) == false
     true
