@@ -24,7 +24,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
 
     @moves = @game.moves
-
   end
 
   def forfeit_game
@@ -44,15 +43,12 @@ class GamesController < ApplicationController
 
     if @game.checkmate?(true)
       @game.update_attributes(status: 'Checkmate', winner: @game.user_id_white)
-    elsif @game.checkmate?(false)  
+    elsif @game.checkmate?(false)
       @game.update_attributes(status: 'Checkmate', winner: @game.user_id_black)
     elsif @game.stalemate(true) || @game.stalemate(false)
-      @game.update_attributes(status: 'Stalemate', winner: "TIED")
+      @game.update_attributes(status: 'Stalemate', winner: 'TIED')
     end
-
   end
-
-  
 
   private
 

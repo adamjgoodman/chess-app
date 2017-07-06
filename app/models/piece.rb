@@ -9,7 +9,6 @@ class Piece < ApplicationRecord
     move!(x, y)
   end
 
-
   def move!(x, y)
     return false unless move_valid?(x, y)
     capture_happened = update_opponent_if_capture(x, y)

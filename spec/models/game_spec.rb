@@ -85,5 +85,4 @@ RSpec.describe Game, type: :model do
 
     expect(game.checkmate?(king.is_black)).to eq false
   end
-
 end
