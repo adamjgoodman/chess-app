@@ -105,6 +105,9 @@ class Game < ApplicationRecord
     user_id_black
   end
 
+
+
+
   # rubocop:enable Metrics/AbcSize
   # rubocop:enable MethodLength
 end
