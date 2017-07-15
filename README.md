@@ -6,20 +6,20 @@ This Chess application is the capstone project of the Firehose Project. Under th
 5 developers built a Ruby on Rails Chess application that fully enforces the rules of the game.
 
 Contributors:
-Issei
-Jorge
-Kalen
-Michelle
-Tyna
+*Issei
+*Jorge
+*Kalen
+*Michelle
+*Tyna
 
 Lead By:
 Jacob
 
 The following technologies were used to create this application:
-Ruby on Rails
-Bootstrap
-PostgreSQL
-Heroku
-RSpec & FactoryGirl
-AJAX requests
-jQuery
+*Ruby on Rails
+*Bootstrap
+*PostgreSQL
+*Heroku
+*RSpec & FactoryGirl
+*AJAX requests
+*jQuery
