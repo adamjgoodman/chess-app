@@ -4,6 +4,11 @@ class Piece < ApplicationRecord
 
   scope :active, (-> { where(x_position: 0..7, y_position: 0..7) })
 
+  def move?(x, y)
+    return false if move_causes_check?(x, y)
+    move!(x, y)
+  end
+
   def move!(x, y)
     return false unless move_valid?(x, y)
     capture_happened = update_opponent_if_capture(x, y)
@@ -12,10 +17,23 @@ class Piece < ApplicationRecord
     update_move_if_promoting_pawn(y)
     update_attributes(type: 'Queen') if promoting_pawn?(y)
     update_move_if_castling(x, y)
-    update_rook_if_castling(x, y)
+    # update_rook_if_castling(x, y)
     update_move_if_capture(x, y) if capture_happened
     update_move_if_capture_en_passant(x, y) if en_passant_happened
     # update_move_if_game_in_check
+    true
+  end
+
+  def move_causes_check?(x, y)
+    state = false
+    ActiveRecord::Base.transaction do
+      move!(x, y)
+      king = Piece.find_by(type: 'King', is_black: is_black, game_id: game_id)
+      state = king.in_check?
+      raise ActiveRecord::Rollback
+    end
+    reload
+    state
   end
 
   def update_position(x, y)
@@ -122,14 +140,14 @@ class Piece < ApplicationRecord
   end
 
   def diagonal_move?(x, y)
-    return true if (x_position - x).abs == (y_position - y).abs
+    return true if (x_position - x).abs == (y_position - y).abs && (x_position != x)
   end
 
   # checking to see if the vertical path is obstructed
   def vertical_obstructed?(x, y)
     y_min = [y_position, y].min
     y_max = [y_position, y].max
-    (y_min + 1...y_max).each do |y_coord|
+    (y_min + 1...y_max - 1).each do |y_coord|
       return true if space_occupied?(x, y_coord)
     end
     false
@@ -139,7 +157,7 @@ class Piece < ApplicationRecord
   def horizontal_obstructed?(x, y)
     x_min = [x_position, x].min
     x_max = [x_position, x].max
-    (x_min + 1...x_max).each do |x_coord|
+    (x_min + 1...x_max - 1).each do |x_coord|
       return true if space_occupied?(x_coord, y)
     end
     false
@@ -191,5 +209,10 @@ class Piece < ApplicationRecord
   def opponent_piece_at?(x, y)
     piece = piece_at(x, y)
     piece && piece.is_black == !is_black
+  end
+
+  def in_bounds(x, y)
+    return false if x > 7 || x < 0 || y > 7 || y < 0
+    true
   end
 end
