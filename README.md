@@ -15,6 +15,8 @@ Contributors:
 Lead By:
 Jacob
 
+![alt tag](https://user-images.githubusercontent.com/14388583/28288746-0e073ea4-6af5-11e7-8e2f-4516795bf967.png)
+
 The following technologies were used to create this application:
 * Ruby on Rails
 * Bootstrap
