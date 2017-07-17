@@ -22,10 +22,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
 
-
     @moves = @game.moves
-
-
   end
 
   def forfeit_game
