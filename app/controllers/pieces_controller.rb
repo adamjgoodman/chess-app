@@ -1,4 +1,5 @@
 class PiecesController < ApplicationController
+  # rubocop:disable Metrics/AbcSize
   def update
     @piece = Piece.find(params[:id])
     new_x = params[:x_position].to_i
@@ -12,6 +13,8 @@ class PiecesController < ApplicationController
       flash[:error] = 'Move is invalid. Try another move.'
     end
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable MethodLength
 
   private
 
