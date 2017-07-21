@@ -1,6 +1,5 @@
 class GamesController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :update_status, only: [:show]
 
   def index
     @available_games = Game.available
@@ -36,18 +35,6 @@ class GamesController < ApplicationController
     end
 
     redirect_to game_path(@game.id)
-  end
-
-  def update_status
-    @game = Game.find(params[:id])
-
-    if @game.checkmate?(true)
-      @game.update_attributes(status: 'Checkmate', winner: @game.user_id_white)
-    elsif @game.checkmate?(false)
-      @game.update_attributes(status: 'Checkmate', winner: @game.user_id_black)
-    elsif @game.stalemate(true) || @game.stalemate(false)
-      @game.update_attributes(status: 'Stalemate', winner: 'TIED')
-    end
   end
 
   private

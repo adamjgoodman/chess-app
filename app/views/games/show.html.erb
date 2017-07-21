@@ -89,11 +89,7 @@ $(document).ready(function () {
       <div class="modal-body">
         Game Status: <%= @game.status %>
         </br>
-        <% if @game.winner == 0 %>
-          Winner: <strong>"TIED GAME!"</strong>
-        <% else %>
-          Winner: <strong><%= @game.winner %></strong>
-        <% end %>
+        Winner: <strong><%= @game.winner %></strong>
       </div>
       <div class="modal-footer">
         <%= link_to 'Start a new game!', root_path, class: "btn btn-secondary" %>
