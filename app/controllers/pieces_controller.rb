@@ -1,6 +1,5 @@
 class PiecesController < ApplicationController
   # rubocop:disable Metrics/AbcSize
-  # rubocop:disable MethodLength
   def update
     @piece = Piece.find(params[:id])
     new_x = params[:x_position].to_i
@@ -8,8 +7,6 @@ class PiecesController < ApplicationController
 
     if @piece.user_id != current_user.id
       flash[:error] = 'Invalid move, not your piece. Try another move.'
-    elsif @piece.user_id != @piece.game.turn
-      flash[:error] = 'It is not your turn!'
     elsif @piece.move?(new_x, new_y)
       render json: { success: true }
     else
