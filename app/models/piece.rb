@@ -16,11 +16,9 @@ class Piece < ApplicationRecord
     update_position(x, y)
     update_move_if_promoting_pawn(y)
     update_attributes(type: 'Queen') if promoting_pawn?(y)
-    update_move_if_castling(x, y)
-    # update_rook_if_castling(x, y)
+    handle_castling(y)
     update_move_if_capture(x, y) if capture_happened
     update_move_if_capture_en_passant(x, y) if en_passant_happened
-    # update_move_if_game_in_check
 
     true
   end
@@ -78,9 +76,14 @@ class Piece < ApplicationRecord
     pawn_at(x, (y + 1)).update_attributes(x_position: 8, y_position: 8, status: 'captured')
   end
 
-  def update_move_if_castling(x, y)
-    Move.last.update_attributes(action: 'castles kingside') if castling_kingside?(x, y)
-    Move.last.update_attributes(action: 'castles queenside') if castling_queenside?(x, y)
+  def handle_castling(y)
+    update_move_if_castling
+    update_rook_if_castling(y)
+  end
+
+  def update_move_if_castling
+    Move.last.update_attributes(action: 'castles kingside') if castling_kingside?
+    Move.last.update_attributes(action: 'castles queenside') if castling_queenside?
   end
 
   def update_move_if_capture(_x, _y)
@@ -103,17 +106,25 @@ class Piece < ApplicationRecord
     type == 'Pawn' && (y == 7 || y.zero?)
   end
 
-  def update_rook_if_castling(x, y)
-    rook_at(7, y).update_attributes(x_position: 5, y_position: y) if castling_kingside?(x, y)
-    rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?(x, y)
+  def update_rook_if_castling(y)
+    rook_at(7, y).update_attributes(x_position: 5, y_position: y) if castling_kingside?
+    rook_at(0, y).update_attributes(x_position: 3, y_position: y) if castling_queenside?
   end
 
-  def castling_kingside?(_x, _y)
-    type == 'King' && x_position == 6 && moves.count == 1
+  def castling_kingside?
+    type == 'King' &&
+      x_position == 6 &&
+      moves.count == 1 &&
+      y_position == (is_black ? 7 : 0) &&
+      rook_at(7, y_position)
   end
 
-  def castling_queenside?(_x, _y)
-    type == 'King' && x_position == 2 && moves.count == 1
+  def castling_queenside?
+    type == 'King' &&
+      x_position == 2 &&
+      moves.count == 1 &&
+      y_position == (is_black ? 7 : 0) &&
+      rook_at(0, y_position)
   end
 
   # a query to check our database and crosscheck to see if the square we want to look up is occupied by another piece

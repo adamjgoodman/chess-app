@@ -72,7 +72,6 @@ RSpec.describe Pawn, type: :model do
     white_pawn2 = Pawn.create(is_black: false, x_position: 2, y_position: 1, game_id: game.id)
     black_pawn2 = Pawn.create(is_black: true, x_position: 1, y_position: 3, game_id: game.id)
     white_pawn2.move!(2, 3)
-    puts "move count: #{white_pawn2.moves.count}"
     # black_pawn2 captures en passant to left
     expect(black_pawn2.move_valid?(2, 2)).to be true
   end
