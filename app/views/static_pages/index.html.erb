@@ -86,16 +86,16 @@
           <div class="row justify-content-center">
             <%= simple_form_for @game do |f| %>
                 <%= f.hidden_field :user_id_white, value: current_user.id %>
-                <%= f.submit "Offer Game as White", class: 'btn btn-white' %>
+                <%= f.submit "Play as White", class: 'btn btn-white' %>
               <% end %>
             <%= simple_form_for @game do |f| %>
                 <%= f.hidden_field :user_id_black, value: current_user.id %>
-                <%= f.submit "Offer Game as Black", class: 'btn btn-black' %>
+                <%= f.submit "Play as Black", class: 'btn btn-black' %>
             <% end %>
           </div>
           <br />
           <h3>Order of Events</h3>
-          <p>1. The game you create will be added to the list of games others can join and you will be taken to a game board that shows you as the color of your choice.</p>
+          <p>1. The game you create will be added to the list of games others can join and you will be taken to your new game board.</p>
           <p>2. Once someone joins your game, their username will appear on your game board as the opposing color.</p>
           <p>3. White moves first. Until that happens, the board will indicate "White's Move". Once white moves, the board will change to indicate “Black’s Move.”</p>
           <p>You can check your Dashboard any time to see the status of the games you are currently playing and the outcomes of past games. Enjoy!</p>

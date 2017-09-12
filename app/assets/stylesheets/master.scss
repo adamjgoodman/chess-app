@@ -4,13 +4,13 @@
 
 .navbar-inverse .navbar-nav .nav-link {
   color: white;
-  font-family: 'kalamregular';
+  font-family: "Segoe UI", Candara, sans-serif;
   opacity: .95;
 }
 
 .navbar-inverse .navbar-brand {
     color: #E3E85A;
-    font-family: 'kalamregular';
+    font-family: "Segoe UI", Candara, sans-serif;
     font-size: 22px;
 }
 
@@ -22,8 +22,8 @@
 }
 
 body {
-    background: image_url('brushed_alu.png');
-  font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif;
+  background: image_url('brushed_alu.png');
+  font-family: 'Overpass', sans-serif;
 }
 
 .hero {
@@ -51,6 +51,20 @@ body {
 
 h1 {
   text-align: center;
+  font-family: 'Overpass', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+  padding-top: 20px;
+}
+
+h4 {
+  font-family: 'Overpass', sans-serif;
+  font-weight: bold;
+  color: black;
+  font-size: 40px;
+  text-align: center;
+  padding: none;
+  margin-left: 0px;
 }
 
 * {
