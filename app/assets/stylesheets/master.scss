@@ -16,7 +16,9 @@
 
 .navbar {
   box-shadow: 0px 1px 3px #2a2a2a;
-  background: image_url('simple_dashed.png')
+  background: #443e4e;
+  position: fixed;
+  width: 100%;
 }
 
 body {
@@ -110,9 +112,73 @@ th {
 }
 
 .frosty {
+  background: rgba(0, 0, 0, 0.5);
   color: white;
-  text-shadow: 0px 0px 3px black;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
+.frosty h1 {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 800;
+  text-shadow: rgba(0, 0, 0, 0.95) 2px 2px;
+  color: white;
+  font-size: 200px;
+  padding-left: 50px;
+  padding-right: 50px;
+}
 
+.frosty h2 {
+  font-family: 'Overpass', sans-serif;
+  font-weight: 100;
+  font-size: 30px;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+  color: white;
+}
 
+.btn {
+  border-radius: 0;
+  margin: 5px;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #fff;
+  border: 5px solid;
+  border-color: #443e4e;
+  color: #443e4e;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+}
+
+.btn-lg {
+  background-color: #fff;
+  border: 5px solid;
+  border-color: #443e4e;
+  color: #443e4e;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 17px;
+}
+
+.btn-white {
+  background-color: #fff;
+  border: 5px solid;
+  border-color: #000;
+  color: #000;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+}
+
+.btn-black {
+  background-color: #000;
+  border: 5px solid;
+  border-color: #000;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+  color: #fff;
+}
