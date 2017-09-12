@@ -17,6 +17,8 @@
 .navbar {
   box-shadow: 0px 1px 3px #2a2a2a;
   background: #443e4e;
+  position: fixed;
+  width: 100%;
 }
 
 .hero {
@@ -78,6 +80,20 @@ body {
 
 h1 {
   text-align: center;
+  font-family: 'Overpass', sans-serif;
+  font-weight: bold;
+  font-size: 50px;
+  padding-top: 20px;
+}
+
+h4 {
+  font-family: 'Overpass', sans-serif;
+  font-weight: bold;
+  color: black;
+  font-size: 40px;
+  text-align: center;
+  padding: none;
+  margin-left: 0px;
 }
 
 * {
@@ -133,11 +149,38 @@ th {
 
 .btn-primary {
   background-color: #fff;
-  border-color: #443e4e;
   border: 5px solid;
+  border-color: #443e4e;
+  color: #443e4e;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+}
+
+.btn-lg {
+  background-color: #fff;
+  border: 5px solid;
+  border-color: #443e4e;
   color: #443e4e;
   font-family:'Overpass', sans-serif;
   font-weight: bold;
   font-size: 20px;
   padding-top: 17px;
+}
+
+.btn-white {
+  background-color: #fff;
+  border: 5px solid;
+  border-color: #000;
+  color: #000;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+}
+
+.btn-black {
+  background-color: #000;
+  border: 5px solid;
+  border-color: #000;
+  font-family:'Overpass', sans-serif;
+  font-weight: bold;
+  color: #fff;
 }

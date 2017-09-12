@@ -6,70 +6,25 @@
   </div>
 
     <div class="container">
-      <div class="row">
-        <div class="col-8 col-offset-2 col-md-8 col-md-offset-2 text-center">
+      <div class="row justify-content-center">
+
         <!-- Button trigger how to play modal -->
 <!--         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#howToPlayModal">
           Instructions
         </button> -->
 
           <% if user_signed_in? %>
-          <!-- Button trigger "Offer A Game" modal -->
-       <!--    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#offerGameModal">
-          Offer Game</button> -->
-            <%= link_to 'Join Game', "#", class: "btn btn-primary btn-lg text-center" %>
-            <%= link_to 'Offer Game', "#", class: "btn btn-primary btn-lg text-center" %>
+            <%= link_to 'Join Game', games_path, class: "btn btn-primary btn-lg text-center" %>
+            <!-- Button trigger "Offer A Game" modal -->
+            <button type="button" class="btn btn-primary btn-lg text-center" data-toggle="modal" data-target="#offerGameModal">Offer Game</button>
+
             <%= link_to 'Continue Game', "#", class: "btn btn-primary btn-lg text-center" %>
           <% else %>
             <%= button_to 'Create Account', new_user_session_path, class: "btn btn-primary btn-lg text-center" %>
           <% end %>
         </div>
       </div>
-    </div>
 
-
-<!-- <div class="booyah-box col-10 offset-1 text-center">
-  <br />
-
-  <h2><b>Available Games</b></h2>
-  <br />
-
-<div class="container">
-  <div class="panel panel-default">
-    <div class="panel-heading"></div>
-    <table class="table">
-      <tr class="heading">
-        <th>#</th>
-        <th>Game Offered By...</th>
-        <th>You would be...</th>
-      </tr>
-      <% @available_games.each do |available_game| %>
-        <tr>
-          <td><%= available_game.id %></td>
-          <td><%= available_game.host_player.name %></td>
-          <td><%= available_game.missing_player_color %></td>
-
-          <td>      <%= simple_form_for available_game do |f| %>
-          <% if user_signed_in? %>
-            <%= f.hidden_field available_game.missing_player_color == 'White' ?
-              :user_id_white : :user_id_black, value: current_user.id %>
-
-            <%= f.submit available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", class: 'btn btn-primary btn-small float right' %>
-          <% else %>
-            <%= button_to available_game.missing_player_color == 'White' ? "Join As White" : "Join As Black", new_user_session_path, class: 'btn btn-primary btn-small float right' %>
-          <% end% %>
-          <br />
-          <% end %>
-         </td>
-        </tr>
-      <% end %>
-    </table>
-  </div>
-</div>
-  <br />
-  <br />
-  <br />
-</div> -->
 
 
 
@@ -122,32 +77,30 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<!--           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
-          </button>
-          <h4 class="modal-title" id="myModalLabel">Offer a Game - Choose Your Color!</h4>
+          </button> -->
+          <h4 class="modal-title" id="myModalLabel">Choose Your Color</h4>
         </div>
         <div class="modal-body">
-          <h3>How to Offer a New Game</h3>
-          <p> As soon as you click one of the “Offer Game” buttons you’ll be taken to a game board that shows you as whichever color you chose.</p>
-          <h3> What will happen next?</h3>
-          <p>1. The new game you have created will be added to the list of games on the welcome page that other players can join.</p>
-          <p>2. As soon as someone clicks “Join” to join your game, that person’s username will appear on your game board playing the other color and the board will indicate “White’s Move.”</p>
-          <p>3. As soon as White makes the first move the board will change again to indicate “Black’s Move.”</p>
-          <p>You can check your Dashboard any time to see the status of the games you are currently playing and the outcomes of the games you have played. Enjoy your games!</p>
-
-        </div>
-        <div class="modal-footer">
-          <div class='float-left'>
+          <div class="row justify-content-center">
             <%= simple_form_for @game do |f| %>
-              <%= f.hidden_field :user_id_white, value: current_user.id %>
-              <%= f.submit "Offer Game As White", class: 'btn btn-primary float-left' %>
+                <%= f.hidden_field :user_id_white, value: current_user.id %>
+                <%= f.submit "Offer Game as White", class: 'btn btn-white' %>
+              <% end %>
+            <%= simple_form_for @game do |f| %>
+                <%= f.hidden_field :user_id_black, value: current_user.id %>
+                <%= f.submit "Offer Game as Black", class: 'btn btn-black' %>
             <% end %>
           </div>
-          <%= simple_form_for @game do |f| %>
-              <%= f.hidden_field :user_id_black, value: current_user.id %>
-              <%= f.submit "Offer Game As Black", class: 'btn btn-primary float-right' %>
-            <% end %>
+          <br />
+          <h3>Order of Events</h3>
+          <p>1. The game you create will be added to the list of games others can join and you will be taken to a game board that shows you as the color of your choice.</p>
+          <p>2. Once someone joins your game, their username will appear on your game board as the opposing color.</p>
+          <p>3. White moves first. Until that happens, the board will indicate "White's Move". Once white moves, the board will change to indicate “Black’s Move.”</p>
+          <p>You can check your Dashboard any time to see the status of the games you are currently playing and the outcomes of past games. Enjoy!</p>
+        </div>
+        <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
       </div>
